@@ -15,4 +15,10 @@
 /backup/local/songs/*
 /backup/local/setlists/*
 /backup/local/instruments/*
+!/backup/external/songs/.gitignore
+!/backup/external/setlists/.gitignore
+!/backup/external/instruments/.gitignore
+!/backup/local/songs/.gitignore
+!/backup/local/setlists/.gitignore
+!/backup/local/instruments/.gitignore
 /nbproject
