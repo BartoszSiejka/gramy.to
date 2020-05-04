@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-3">
+        <nav class="navbar navbar-dark bg-dark w-100">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <svg class="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 011.414 0l6.647 6.646a.5.5 0 01-.708.708L8 2.207 1.354 8.854a.5.5 0 11-.708-.708L7.293 1.5z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <button id="dark-mode" class="btn btn-dark">
+                {% if app.request.cookies.get('dark_mode') %}
+                    {{ 'theme.light'|trans }}
+                {% else %}
+                    {{ 'theme.dark'|trans }}
+                {% endif %}
+            </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="dark-blue-text">
+                    <i class="fas fa-bars fa-1x">
+                        <svg class="bi bi-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                        </svg>
+                    </i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                <ul class="navbar-nav mr-auto">
+                    <a href="{{ path('manage') }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'main.manage'|trans }}</span>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="row justify-content-center my-3">
+        <h1 class="text-center">{{ 'song.header'|trans }}</h1>
+    </div>
+    <div id="search-row" class="row">
+        <div class="form-group col-12 col-xl-8">
+            <label for="search">{{ 'song.search'|trans }}</label>
+            <input type="text" class="form-control" id="search">
+        </div>
+        <div class="justify-content-end col-12 col-xl-4">
+            <a href="{{ path('song_add') }}">
+                <button class="btn btn-secondary w-100 h-100">{{ 'song.add.button'|trans }}</button>
+            </a>
+        </div>
+        <div class="col-12">
+            <p>{{ 'song.number'|trans }}: {{ songsNumber }}</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'song.table.artist'|trans }}</th>
+                        <th scope="col">{{ 'song.table.title'|trans }}</th>
+                        <th></th>
+                        <th></th>
+                        <th scope="col">{{ 'song.table.instrument'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody id="dynamicContent">
+                </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalTitle">{{ 'song.modal.title'|trans }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ 'song.modal.content'|trans }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ 'song.modal.close'|trans }}</button>
+                    <a id="confirmationButton"><button type="button" class="btn btn-danger">{{ 'song.modal.delete'|trans }}</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('#confirmationModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('song-id');
+            var artist = button.data('artist');
+            var title = button.data('title');
+            $('.modal-body').text('{{ 'song.modal.content'|trans }}');
+            $('.modal-body').text($('.modal-body').text().replace('%artist%', artist).replace('%title%', title));
+            var path = '{{ path('song_remove', { 'id': 'songId' }) }}';
+            $('#confirmationButton').attr('href',path.replace('songId', id));
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            load_data(1);
+
+            function load_data(page, query = '')
+            {
+                $.ajax({
+                    url:"{{ path('song_search') }}",
+                    method:"POST",
+                    data:{page: page, query:query},
+                    success:function(data)
+                    {
+                      $('#dynamicContent').html(data);
+                    }
+                });
+            }
+            
+            $(document).on('click', '.page-link', function(){
+                var page = $(this).data('page_number');
+                var query = $('#search').val();
+                load_data(page, query);
+                toTop();
+            });
+            
+            $('#search').keyup(function(){
+                if( this.value.length > 2 || this.value.length === 0 ) {
+                    var query = $('#search').val();
+                    load_data(1, query);
+                }
+            });
+        });
+    </script>
+    <script>
+        function toTop() {
+            var targetOffset = $('#search-row').offset().top;
+            $('html,body').animate({scrollTop: targetOffset}, 500);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,15 @@
+/*
+ * This file is part of the gramy.to (weplay.it) app.
+ *
+ * (c) Bartosz Siejka
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+.cke_editable img {
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    -o-filter: invert(100%);
+    -ms-filter: invert(100%);
+    filter: invert(100%);
+}

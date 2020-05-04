@@ -1,0 +1,333 @@
+form:
+    save: Save
+    next: Next
+    submit: Submit
+    instrument:
+        name:  Instrument name
+        metronome: Metronome should be activated for this instrument?
+    setlist:
+        name: Setlist name
+    song:
+        title: Title
+        artist: Artist
+    song.data:
+        instrument: Instrument
+        content: Content to show
+        rate: Rate [beats per minute]
+        meter: Meter
+        default: Set as default view (if instrument haven't own view show this view)
+        next: Save and add another
+        save: Save and finish
+        
+button:
+    add: Add
+    edit: Edit
+    remove: Remove
+    back: Back
+
+theme:
+    dark: Dark theme
+    light: Light theme
+
+pagination:
+    next: Next
+    previous: Previous
+        
+seo:
+    description: Application used to view lyrics, notes, chords etc. for music band members. One person manage what should be show, another see content depend on role.
+    keywords: application, musician, music band, song book
+    title: Gramy.to (we-play.it)
+    
+main:
+    manage: Manage
+    play: Play
+    
+manage:
+    song: Manage songs
+    instrument: Manage instruments
+    setlist: Manage setlists
+    backup: Backup
+    restore: Restore
+    
+song:
+    header: Manage songs
+    search: Type at least 3 chars to show filtered list
+    number: Number of songs in database
+    searchbox:
+        not.found: Unfortunately not matching song found
+    add:
+        header: Add song
+        button: Add song
+    edit:
+        header: Edit song
+    data:
+        add:
+            header: Add song data
+            button: +
+        edit:
+            header: Edit song data
+        remove:
+            button: Remove song data for this instrument
+        modal:
+            title: Song data remove confirmation
+            content: If you confirm all song %artist% - %title% data for %instrument% will be permanently remove. Are you sure?
+            close: No, thanks
+            delete: Yes, remove
+    modal:
+        title: Remove song confirmation
+        content: If you confirm song %artist% - %title% and all data for this song will be permanently remove. Are you sure?
+        close: No, thanks
+        delete: Yes, remove
+    table:
+        artist: Artist
+        title: Title
+        instrument: Added instruments
+    
+instrument:
+    header: Manage instruments
+    add:
+        header: Add instrument
+        button: Add instrument
+    edit:
+        header: Edit instrument
+    table:
+        name: Name
+        metronome: Metronome
+    modal:
+        title: Remove instrument confirmation
+        content: If you confirm you permanently remove this instrument and all songs data for this instrument. Are you sure?
+        close: No, thanks
+        delete: Yes, remove
+    
+setlist:
+    header: Manage setlist
+    button:
+        song: Songs
+    add:
+        header: Add setlist
+        button: Add setlist
+    edit:
+        header: Edit setlist
+    table:
+        name: Name
+    modal:
+        title: Remove setlist confirmation
+        content: If you confirm setlist will be permanently remove. Are you sure?
+        close: No, thanks
+        delete: Yes, remove
+    song:
+        header: Setlist songs
+        add:
+            button: Add songs
+            header: Add songs to setlist
+        done: Done
+        table:
+            artist: Artist
+            title: Title
+        modal:
+            title: Remove song from setlist confirmation
+            content: If you confirm song %artist% - %title% from %setlist% setlist will be permanently remove. Are you sure?
+            close: No, thanks
+            delete: Yes, remove
+        position:
+            alert:
+                strong: Something gone wrong
+                normal: Change position won't be permanently save probably. Try refresh page and try again. Otherwise, contact with admin.
+                
+play: 
+    header: Choose instrument
+    
+role:
+    header: Choose role
+    display: Display
+    control: Control
+
+display:
+    sse:
+        error: Your web browser not support Server-Send Event. Update browser, lunch javascript or change to another.
+        
+metronome:
+    webapi:
+        error: Your browser not support WebAudio API. Try to use Google Chrome or Safari.
+    header: Metronome
+    helper: Some web browser not allow to play sound automatically - without user interaction. If metronome doesn't start by itself try to use "Start" button once. Next songs should start metronome automatically.
+    
+control:
+    button:
+        setlist: Manage setlist
+        song: Fast song
+    quick:
+        song:
+            add:
+                header: Choose fast song.
+                play: PLAY
+    set: Display for all
+    alert:
+        strong: Song is not display for all
+        normal: Refresh this page or restart browser and try again. Otherwise, contact with admin.
+        
+backup:
+    header: Backup
+    song: Song database
+    setlist: Setlist database
+    instrument: Instrument database
+    database: Database name
+    date: Last change date of current database
+    local: Local backup files
+    external: External backup files
+    local.date: Last update of local backup
+    external.date: Last update of external backup
+    button:
+        create: Make backup
+        send: Send backup to server
+        download: Get backup from server
+        load: Load data from backup
+        usb:
+            send: Send backup to USB storage
+            download: Download backup from USB storage
+    choose:
+        backup:
+            header: Choose database to backup
+        restore:
+            header: Choose database to restore
+    alert:
+        success:
+            header: Success!
+            backup:
+                content: Backup created successfully.
+            restore:
+                content: Restore successfully.
+        failed:
+            header: Failure!
+            backup:
+                content: Unfortunately backup is not created. Try again later. Otherwise, contact with admin.
+            restore:
+                content: Unfortunately restore is finished with error. Try again later. Otherwise, contact with admin.
+        redirect: Redirect to backup menu for a while.
+    restore:
+        modal:
+            title: Restore confirmation
+            content: Restore this database version remove permanently current version with all files. Are you sure?
+            close: No, thanks
+            restore: Yes, restore
+    remote:
+        send:
+            copying: Copying file
+            exist:
+                remote: File not sent cause exist on external server
+                usb: File not sent cause exist on USB storage
+                local: File not downloaded cause exist on local server
+            alert:
+                failed:
+                    header: Failure!
+                success:
+                    header: Success!
+                    content: All files sent correctly.
+                redirect: Redirect to backup menu for a while.
+        error:
+            ssh2_connect: Function ssh2_connect not found, you cannot use ssh2 here.
+            connection: Unable to connect.
+            authentication: Unable to authenticate.
+            sftp: Unable to create a stream.
+            directory: Could not open the directory.
+            local:
+                file: 
+                    open: Unable to open local file
+                    create: Unable to create local file
+                    write: Unable to write to local file
+            remote:
+                file: 
+                    open: Unable to open remote file
+                    create: Unable to create remote file
+                    write: Unable to write to remote file
+            usb:
+                notFound: USB storage not found. Plug device and try again.
+                backupNotExist: Backup files not exist on this USB storage.
+                device: Device
+                permission: issue. It is disconnect or permission are insufficient. Unplug and plug device again and try again. Otherwise, contact with admin.
+                file: 
+                    open: Unable to open file from USB storage
+                    create: Unable to create file on USB storage
+                    write: Unable to write to file on USB storage
+                    
+manual:
+    main: Main page
+    main.content: <p>On the main page you can choose how you want use this app.</p>
+                  <p>First - play - is used for display songs for all band members.</p>
+                  <p>Second - manage - is used for prepare song, setlist or instrument database. Furthermore there you can manage of your backups.</p> 
+                  <p>On main page you can choose polish or english language using flag on top. You can switch theme for dark or light too, but if you can do this you have to have cookie enabled in your browser.</p>
+                  <p>Application theme you can switch on every place in app using button on top menu.</p>
+    button: Manual
+    header: User manual
+    play:
+        content: <p>Play option is used for display earlier prepared lyrics, chords, notes etc. for all band members.</p>
+        choose.instrument: <p>Firstly choose which instrument you use. Song data will be display for your instrument if exist. Otherwise, you show default song data.</p>
+        choose.role: <p>Secondly choose your role.</p>
+                     <p>If you choose display option you will be able to display song data.</p>
+                     <p>If you choose manage option you will be able to decide on the setlist choice or quick song for display for all band members.</p>
+        role:
+            display: <p>In this view you are addicted to the person who control application. You can show selected songs for your instrument only.</p>
+                      <p>If you want use this option you have to have enabled JavaScripts and Server-Side Events in your browser. By default these options are enabled in modern browsers. However, if you have a problem with it try to change browser to Google Chrome, Safari or Firefox.</p>
+                      <p>If you have checked metronome option for your instrument, metronome should appear here. Unfortunately modern browsers prevent play sounds or video automatically by default. It is possible that metronome doesn't start first time. Then you have to push start button near metronome first time. In next songs metronome should work automatically.</p>
+                      <p>If you have checked metronome option for your instrument, metronome should appear here. Unfortunately modern browsers prevent play sounds or video aumatically by default. It is possible that metronome doesn't start first time. Then you have to push start button near metronome first time. In next songs metronome should work automatically.</p>
+            control:
+                content: <p>In this view you choose what everyone has displayed. You can choose one song or all setlist. Attention! Song which is displayed for you isn't displayed for else members until you push display for all button.</p>
+                     <p>If you choose setlist you show <<, >> and display for all buttons on top. First and second are used for switch to preavious and next song. Display for all button is used for display song which you actually have on your screen for all members.</p>
+                setlist:
+                    content: <p>Button show list of all existing setlist. On this view you can choose setlist to play when you click on button with playlist name. You can edit songs in setlist and add new one.</p>
+                    song: <p>In setlist song view you can change their order by drag arrows near song and drop it on desired position. You can add another song using add song button.</p>
+                              <p>Bold font on existing songs list mean that this song exist in your setlist. You can add this song again if you want play it more than once for example.</p>
+                              <p>To add song to setlist you have to click add button near chosen song.</p>
+                              <p>To search for a song start typing title or artist in search bar. After three chars you show first result. If you can't find your song just keep typing.</p>
+                              <p>To back to manage song in setlist view push done button near search bar.</p>
+                              <p>To remove song from playlist use remove button near song in setlist.</p>
+                    add: <p>To add new setlist push add setlist button, type it name and click save button.</p>
+                quick.song: <p>Quick song button is used for choose only one song to display, without creating playlist for it.</p>
+                             <p>To search for a song start typing title or artist in search bar. After three chars you show first result. If you can't find your song just keep typing.</p>
+                             <p>To display song push play button near song.</p>
+    manage:
+        content: <p>Manage option is used for prepare song, instrument and setlist database. Furthermore there you can manage of your backups.</p>
+                 <p>To search for a song start typing title or artist in search bar. After three chars you show first result. If you can't find your song just keep typing.</p>
+        song:
+            content: <p>Manage songs is used for prepare and edit content of songs which will be display for all band members. </p>
+            add: <p>To add song push add song button near search bar.</p>
+                 <p>Add song artist and title and push next button and add song data for at least one instrument.</p>
+                 <p>Data for first instrument are always set as default, so are displayed for everyone who hasn't data for own instrument. If you want to change default view you have to check checkbox near set as default view.</p>
+                 <p>If you want to finish work after add data for current instrument push save and finish button. If you want to add another instrument data push save and add another.</p>
+            edit: <p>To edit song title and artist find it in song list and push edit button near song.</p>
+            remove: <p>To remove song and all its data you have to find song and push remove button near song. In next step you have to confirm your decision.</p>
+            add.data: <p>To add data for song you have to find song and push + button in existin instrument column near song.</p> 
+                      <p>Data for first instrument are always set as default, so are displayed for everyone who hasn't data for own instrument. If you want to change default view you have to check checkbox near set as default view.</p>
+                    <p>If you want to finish work after add data for current instrument push save and finish button. If you want to add another instrument data push save and add another.</p>
+            edit.data: <p>To edit data for instrument you have to find song and push button with instrument name in existing instrument column. In this view you can remove data for this instrument to this song too.</p>
+        instrument:
+            content: <p>Manage instrument is used to add and edit existing instruments.</p>
+            add: <p>To add instrument you have to push add instrument button.</p>
+                 <p>You have to type instrument name in form. If you want start metronome for this instrument you have to check checkbox near metronome should be...</p>
+            edit: <p>To edit instrument you have to find it and push edit button near instrument.</p>
+            remove: <p>To remove instrument you have to find instrument and push remove button. In next step you have to confirm your decision.</p>
+        setlist:
+            content: <p>Manage setlist is used for add and edit setlist.</p>
+            add: <p>To add setlist push add setlist button, type its name and push save button.</p>
+            edit: <p>To edit setlist you have to find setlist and push edit button near setlist.</p>
+            remove: <p>To remove setlist you have to find setlist and push remove button near setlist. In next step you have to confirm your decision.</p>
+            song: <p>To manage song in setlist you have to find setlist and push song button near it.</p>
+                  <p>In setlist song view you can change their order by drag arrows near song and drop it on desired position. You can add another song using add song button.</p>
+                  <p>Bold font on existing songs list mean that this song exist in your setlist. You can add this song again if you want play it more than once for example.</p>
+                  <p>To add song to setlist you have to click add button near chosen song.</p>
+                  <p>To search for a song start typing title or artist in search bar. After three chars you show first result. If you can't find your song just keep typing.</p>
+                  <p>To back to manage song in setlist view push done button near search bar.</p>
+                  <p>To remove song from playlist use remove button near song in setlist.</p>
+        backup:
+            content: <p>Backup view is used for making backup and restore data from backup files. In this view you can synchronized backup files with SSH server or USB storage.</p>
+                     <p>In table you see date of actual using databases, last local backup and last external backup which are synchronized with local server</p>
+                     <p><b>Attention! During send/download backup files you have to waiting for confirmation successfull finish of operation. In other way your data can be broken.</b></p>
+                     <p><b>Attention! After plug in USB storage and finishing using it the best way is shutdown server befeore unplug USB storage. If you don't do this your USB storage data can be broken.</b></p>
+            create: <p>Make backup button is used for making locbakckupal backup from chosen in next step database.</p>
+            load: <p>Load data from backup button is used for restore data from backup files. In next view you can choose which version of database you want to restore. There are all local files and synchronized external files. You should push button with one of them and confirm your decision.</p>
+                  <p><b>Attention! This action remove all existing databases permanently and make new from backup files.</b></p>
+            send: <p>Send backup to server button is used for send all existing local backup files to SSH server.</p>
+            download: <p>Get backup from server button is use for download all earlier sending and creating remote backup files form SSH server.</p>
+            usb.send: <p>Send backup to USB storage button is used for send backup files to USB storage.</p>
+            usb.download: <p>Get backup from USB storage button is used for get all earlier sending files from USB storage.</p>
+            

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row justify-content-end">
+        <div class="col-sm-5 no-padding no-margin">
+            <button id="dark-mode" class="btn btn-dark locale">
+                {% if app.request.cookies.get('dark_mode') %}
+                    {{ 'theme.light'|trans }}
+                {% else %}
+                    {{ 'theme.dark'|trans }}
+                {% endif %}
+            </button>
+            <a href="{{ path(route, params|merge({ _locale: 'pl' })) }}" title="Przełącz na polski">
+                <img class="locale" style="display:inline;" src="{{ asset('images/poland-flag-small.png') }}" alt="Polski">
+            </a>
+            <a href="{{ path(route, params|merge({ _locale: 'en' })) }}" title="Switch to english">
+                <img class="locale" style="display:inline;" src="{{ asset('images/united-kingdom-flag-small.png') }}" alt="English">
+            </a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 main-play my-3">
+            <a href="{{ path('play') }}">
+                <button class="btn btn-dark w-100 h-100 main-button">{{ 'main.play'|trans }}</button>
+            </a>
+        </div>
+        <div class="col-12 main-manage my-3">
+            <a href="{{ path('manage') }}">
+                <button class="btn btn-secondary w-100 h-100 main-button">{{ 'main.manage'|trans }}</button>
+            </a>
+        </div>
+        <div class="col-12 main-manage my-3">
+            <a href="{{ path('manual') }}" target="_blank">
+                <button class="btn btn-light w-100 h-100 main-button">{{ 'manual.button'|trans }}</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

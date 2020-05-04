@@ -1,0 +1,362 @@
+root:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /pl
+        permanent: true
+
+home:
+    path: /{_locale}/
+    controller: App\Controller\DefaultController::index
+    requirements:
+        _locale: pl|en
+
+switch_to_dark:
+    path: /{_locale}/dark
+    controller: App\Controller\DefaultController::switchToDark
+    requirements:
+        _locale: pl|en
+
+manage:
+    path:
+        pl: /{_locale}/zarzadzam/
+        en: /{_locale}/manage/
+    controller: App\Controller\ManageController::index
+    requirements:
+        _locale: pl|en
+
+song:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/
+        en: /{_locale}/manage/songs/
+    controller: App\Controller\SongController::index
+    requirements:
+        _locale: pl|en
+
+song_add:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/dodaj/
+        en: /{_locale}/manage/songs/add/
+    controller: App\Controller\SongController::addSong
+    requirements:
+        _locale: pl|en
+
+song_data_add:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/dodaj/dane/{id}/
+        en: /{_locale}/manage/songs/add/data/{id}/
+    controller: App\Controller\SongController::addSongData
+    requirements:
+        _locale: pl|en
+
+song_edit:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/edytuj/nazwa/{id}/
+        en: /{_locale}/manage/songs/edit/name/{id}/
+    controller: App\Controller\SongController::editSong
+    requirements:
+        _locale: pl|en
+
+song_data_edit:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/edytuj/dane/{id}/
+        en: /{_locale}/manage/songs/edit/data/{id}/
+    controller: App\Controller\SongController::editSongData
+    requirements:
+        _locale: pl|en
+
+song_data_remove:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/usun/dane/{id}/
+        en: /{_locale}/manage/songs/remove/data/{id}/
+    controller: App\Controller\SongController::removeSongData
+    requirements:
+        _locale: pl|en
+
+song_remove:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/usun/{id}/
+        en: /{_locale}/manage/songs/remove/{id}/
+    controller: App\Controller\SongController::removeSong
+    requirements:
+        _locale: pl|en
+
+song_search:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/szukaj
+        en: /{_locale}/manage/songs/search
+    controller: App\Controller\SongController::searchSong
+    requirements:
+        _locale: pl|en
+
+instrument:
+    path:
+        pl: /{_locale}/zarzadzam/instrumenty/
+        en: /{_locale}/manage/instruments/
+    controller: App\Controller\InstrumentController::index
+    requirements:
+        _locale: pl|en
+
+instrument_add:
+    path:
+        pl: /{_locale}/zarzadzam/instrumenty/dodaj/
+        en: /{_locale}/manage/instruments/add/
+    controller: App\Controller\InstrumentController::add
+    requirements:
+        _locale: pl|en
+
+instrument_edit:
+    path:
+        pl: /{_locale}/zarzadzam/instrumenty/edytuj/{id}/
+        en: /{_locale}/manage/instruments/edit/{id}/
+    controller: App\Controller\InstrumentController::edit
+    requirements:
+        _locale: pl|en
+
+instrument_remove:
+    path:
+        pl: /{_locale}/zarzadzam/instrumenty/usun/{id}/
+        en: /{_locale}/manage/instruments/remove/{id}/
+    controller: App\Controller\InstrumentController::remove
+    requirements:
+        _locale: pl|en
+        
+setlist:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/
+        en: /{_locale}/manage/setlist/
+    controller: App\Controller\SetlistController::index
+    requirements:
+        _locale: pl|en
+
+setlist_add:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/dodaj/
+        en: /{_locale}/manage/setlisty/add/
+    controller: App\Controller\SetlistController::add
+    requirements:
+        _locale: pl|en
+
+setlist_edit:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/edytuj/{id}/
+        en: /{_locale}/manage/setlist/edit/{id}/
+    controller: App\Controller\SetlistController::edit
+    requirements:
+        _locale: pl|en
+
+setlist_remove:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/usun/{id}/
+        en: /{_locale}/manage/setlist/remove/{id}/
+    controller: App\Controller\SetlistController::remove
+    requirements:
+        _locale: pl|en
+        
+setlist_song_add_proccess:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/piosenki/dodaj/procesuj/{setlistId}/{songId}/{controlSection}/{instrumentId}/
+        en: /{_locale}/manage/setlist/songs/add/proccess/{setlistId}/{songId}/{controlSection}/{instrumentId}/
+    controller: App\Controller\SetlistController::songAddProccess
+    requirements:
+        _locale: pl|en
+        
+setlist_song_add_search:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/piosenki/dodaj/szukaj/
+        en: /{_locale}/manage/setlist/songs/add/search/
+    controller: App\Controller\SetlistController::songAddSearch
+    requirements:
+        _locale: pl|en
+        
+setlist_song_add:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/piosenki/dodaj/{id}/{controlSection}/{instrumentId}/
+        en: /{_locale}/manage/setlist/songs/add/{id}/{controlSection}/{instrumentId}/
+    controller: App\Controller\SetlistController::songAdd
+    requirements:
+        _locale: pl|en
+        
+setlist_song_remove:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/piosenki/usun/{id}/{controlSection}/{instrumentId}/
+        en: /{_locale}/manage/setlist/songs/remove/{id}/{controlSection}/{instrumentId}/
+    controller: App\Controller\SetlistController::songRemove
+    requirements:
+        _locale: pl|en
+        
+setlist_song:
+    path:
+        pl: /{_locale}/zarzadzam/setlisty/piosenki/{id}/{controlSection}/{instrumentId}/
+        en: /{_locale}/manage/setlist/songs/{id}/{controlSection}/{instrumentId}/
+    controller: App\Controller\SetlistController::song
+    requirements:
+        _locale: pl|en
+
+setlist_song_change_position:
+    path:
+        pl: /{_locale}/zarzadzam/piosenki/pozycja/zmien/
+        en: /{_locale}/manage/songs/position/change/
+    controller: App\Controller\SetlistController::songChangePosition
+    requirements:
+        _locale: pl|en
+        
+play:
+    path:
+        pl: /{_locale}/gram/
+        en: /{_locale}/play/
+    controller: App\Controller\PlayController::index
+    requirements:
+        _locale: pl|en
+        
+role:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/
+        en: /{_locale}/play/rola/{instrumentId}/
+    controller: App\Controller\PlayController::role
+    requirements:
+        _locale: pl|en
+        
+display:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/wyswietlam/
+        en: /{_locale}/play/rola/{instrumentId}/display/
+    controller: App\Controller\PlayController::display
+    requirements:
+        _locale: pl|en
+        
+song_refresh:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/wyswietlam/odswiez/
+        en: /{_locale}/play/rola/{instrumentId}/display/refresh/
+    controller: App\Controller\PlayController::songRefresh
+    requirements:
+        _locale: pl|en
+        
+quick_song:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/steruje/szybka/piosenka/
+        en: /{_locale}/play/rola/{instrumentId}/control/quick/song/
+    controller: App\Controller\PlayController::quickSong
+    requirements:
+        _locale: pl|en
+        
+quick_song_add:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/steruje/szybka/piosenka/dodaj/
+        en: /{_locale}/play/rola/{instrumentId}/control/quick/song/dodaj/
+    controller: App\Controller\PlayController::quickSongAdd
+    requirements:
+        _locale: pl|en
+        
+set_song:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/steruje/piosenka/ustaw/
+        en: /{_locale}/play/rola/{instrumentId}/control/song/set/
+    controller: App\Controller\PlayController::setSong
+    requirements:
+        _locale: pl|en
+        
+control_setlist:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/steruje/setlisty/
+        en: /{_locale}/play/rola/{instrumentId}/control/setlist/
+    controller: App\Controller\PlayController::setlist
+    requirements:
+        _locale: pl|en
+        
+control_setlist_add:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/steruje/setlisty/dodaj/
+        en: /{_locale}/play/rola/{instrumentId}/control/setlist/add/
+    controller: App\Controller\PlayController::setlistAdd
+    requirements:
+        _locale: pl|en
+        
+control:
+    path:
+        pl: /{_locale}/gram/rola/{instrumentId}/steruje/{setlistId}/{songId}/
+        en: /{_locale}/play/rola/{instrumentId}/control/{setlistId}/{songId}/
+    controller: App\Controller\PlayController::control
+    requirements:
+        _locale: pl|en
+         
+backup:
+    path:
+        pl: /{_locale}/zarzadzam/kopia-zapasowa/
+        en: /{_locale}/manage/backup/
+    controller: App\Controller\DefaultController::backup
+    requirements:
+        _locale: pl|en
+         
+backup_choose:
+    path:
+        pl: /{_locale}/zarzadzam/kopia-zapasowa/wybierz/
+        en: /{_locale}/manage/backup/choose/
+    controller: App\Controller\DefaultController::backupChoose
+    requirements:
+        _locale: pl|en
+         
+backup_data:
+    path:
+        pl: /{_locale}/zarzadzam/kopia-zapasowa/wybierz/{database}/
+        en: /{_locale}/manage/backup/choose/{database}/
+    controller: App\Controller\DefaultController::backupData
+    requirements:
+        _locale: pl|en
+         
+send_backup:
+    path:
+        pl: /{_locale}/zarzadzam/kopia-zapasowa/wyslij/
+        en: /{_locale}/manage/backup/send/
+    controller: App\Controller\DefaultController::sendBackup
+    requirements:
+        _locale: pl|en
+         
+download_backup:
+    path:
+        pl: /{_locale}/zarzadzam/kopia-zapasowa/pobierz/
+        en: /{_locale}/manage/backup/download/
+    controller: App\Controller\DefaultController::downloadBackup
+    requirements:
+        _locale: pl|en
+         
+send_backup_usb:
+    path:
+        pl: /{_locale}/zarzadzam/kopia-zapasowa/usb/wyslij/
+        en: /{_locale}/manage/backup/usb/send/
+    controller: App\Controller\DefaultController::sendBackupUSB
+    requirements:
+        _locale: pl|en
+         
+download_backup_usb:
+    path:
+        pl: /{_locale}/zarzadzam/kopia-zapasowa/usb/pobierz/
+        en: /{_locale}/manage/backup/usb/download/
+    controller: App\Controller\DefaultController::downloadBackupUSB
+    requirements:
+        _locale: pl|en
+         
+restore_choose:
+    path:
+        pl: /{_locale}/zarzadzam/przywracanie/wybierz/
+        en: /{_locale}/manage/restore/choose/
+    controller: App\Controller\DefaultController::restoreChoose
+    requirements:
+        _locale: pl|en
+         
+restore_data:
+    path:
+        pl: /{_locale}/zarzadzam/przywracanie/wybierz/{path}/{database}/{fileName}/
+        en: /{_locale}/manage/restore/choose/{path}/{database}/{fileName}/
+    controller: App\Controller\DefaultController::restoreData
+    requirements:
+        _locale: pl|en
+    
+manual:
+    path: 
+        pl: /{_locale}/instrukcja/
+        en: /{_locale}/manual/
+    controller: App\Controller\DefaultController::manual
+    requirements:
+        _locale: pl|en

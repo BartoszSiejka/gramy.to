@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-3">
+        <nav class="navbar navbar-dark bg-dark w-100">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <svg class="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 011.414 0l6.647 6.646a.5.5 0 01-.708.708L8 2.207 1.354 8.854a.5.5 0 11-.708-.708L7.293 1.5z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <button id="dark-mode" class="btn btn-dark">
+                {% if app.request.cookies.get('dark_mode') %}
+                    {{ 'theme.light'|trans }}
+                {% else %}
+                    {{ 'theme.dark'|trans }}
+                {% endif %}
+            </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="dark-blue-text">
+                    <i class="fas fa-bars fa-1x">
+                        <svg class="bi bi-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                        </svg>
+                    </i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                <ul class="navbar-nav mr-auto">
+                    <a href="{{ path('manage') }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'main.manage'|trans }}</span>
+                        </li>
+                    </a>
+                    <a href="{{ path('setlist') }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'setlist.header'|trans }}</span>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="row justify-content-center my-3">
+        <h1 class="text-center">{{ 'setlist.song.header'|trans }} {{ setlistRepository.name }}</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-4 my-1"> 
+            {% if controlSection == 0 %}
+                <a href="{{ path('setlist') }}">
+                    <button class="btn btn-secondary w-100 h-100">
+                        {{ 'button.back'|trans }}
+                    </button>
+                </a>
+            {% else %}
+                <a href="{{ path('control_setlist', { 'instrumentId': instrumentId } ) }}">
+                    <button class="btn btn-secondary w-100 h-100">
+                        {{ 'button.back'|trans }}
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+        <div class="col-12 col-xl-4 my-1">
+            <a href="{{ path('setlist_song_add', { 'id': setlistRepository.id, 'controlSection': controlSection, 'instrumentId': instrumentId }) }}">
+                <button class="btn btn-secondary w-100 h-100">{{ 'setlist.song.add.button'|trans }}</button>
+            </a>
+        </div>
+    </div>
+    <div id="alert" class="row my-3" style="display: none;">
+        <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+            <strong>{{ 'setlist.song.position.alert.strong'|trans }}</strong></br> 
+            {{ 'setlist.song.position.alert.normal'|trans }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'setlist.song.table.artist'|trans }}</th>
+                        <th scope="col">{{ 'setlist.song.table.title'|trans }}</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="draggable">
+                    {% for song in setlistSongRepository %}
+                        <tr data-position="{{ song.position }}" data-id="{{ song.id }}">
+                            <th scope="row" id="position">{{ song.position }}</th>
+                            <td>{{ song.songId.artist }}</td>
+                            <td>{{ song.songId.title }}</td>
+                            <td><button class="btn btn-danger" data-toggle="modal" data-target="#confirmationModal" data-song-id="{{ song.id }}" data-artist="{{ song.songId.artist }}" data-title="{{ song.songId.title }}" data-setlist="{{ setlistRepository.name }}">{{ 'button.remove'|trans }}</button></td>
+                            <td>
+                                <svg class="bi bi-arrow-up-down" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M11 3.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M10.646 2.646a.5.5 0 01.708 0l3 3a.5.5 0 01-.708.708L11 3.707 8.354 6.354a.5.5 0 11-.708-.708l3-3zm-9 7a.5.5 0 01.708 0L5 12.293l2.646-2.647a.5.5 0 11.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M5 2.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                                </svg>
+                            </td>
+                        </tr>
+                    {%  endfor %}
+                </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalTitle">{{ 'setlist.song.modal.title'|trans }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ 'setlist.song.modal.content'|trans }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ 'setlist.song.modal.close'|trans }}</button>
+                    <a id="confirmationButton"><button type="button" class="btn btn-danger">{{ 'setlist.song.modal.delete'|trans }}</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('#confirmationModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('song-id');
+            var artist = button.data('artist');
+            var title = button.data('title');
+            var setlist = button.data('setlist');
+            $('.modal-body').text('{{ 'setlist.song.modal.content'|trans }}');
+            $('.modal-body').text($('.modal-body').text().replace('%artist%', artist).replace('%title%', title).replace('%setlist%', setlist));
+            var path = '{{ path('setlist_song_remove', { 'id': 'setlistSongId', 'controlSection': controlSection, 'instrumentId': instrumentId }) }}';
+            $('#confirmationButton').attr('href',path.replace('setlistSongId', id));
+        });
+    </script>
+    <script>
+        var element = document.getElementById('draggable');
+
+        Sortable.create(element, {
+            group:'song',
+            animation: 100,
+            onUpdate: function (event) {
+                var postSongPositions = new Array();
+                var i = 0;
+
+                $('tbody tr').each(function(){
+                    i++;
+                    postSongPositions.push($(this).data("id"));
+                    $(this).find('#position').text(i);
+                });
+
+                var filteredPostSongPositions = postSongPositions.filter(function (el) {
+                    return el != null;
+                });
+                
+                $.ajax({
+                    url:"{{ path('setlist_song_change_position') }}",
+                    method:"POST",
+                    data:{postSongPositions: filteredPostSongPositions, setlistId: '{{ setlistRepository.id }}'},
+                    success:function(data)
+                    {
+                        if (!data) {
+                            $('#alert').show();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

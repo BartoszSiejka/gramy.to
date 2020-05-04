@@ -1,0 +1,238 @@
+/*
+ * This file is part of the gramy.to (weplay.it) app.
+ *
+ * (c) Bartosz Siejka
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+html {
+    background-color: #fff;
+    height: 100%;
+}
+
+.dark-mode {
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    -o-filter: invert(100%);
+    -ms-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.dark-mode img {
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    -o-filter: invert(100%);
+    -ms-filter: invert(100%);
+    filter: invert(100%);
+}
+
+body {
+    width: 100%;
+    min-height: 100%;
+    font-size: 16px;
+    font-family: 'Arial', 'sans-serif';
+    background-color: #fff;
+}
+
+.locale {
+    width: 33%;
+    height: 100%;
+    float: left;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.main-manage {
+    height: 150px;
+}
+
+.main-play {
+    height: 400px;
+}
+
+.main-button {
+    font-size: 96px;
+}
+
+.manage-button-container {
+    height: 150px;
+}
+
+.manage-button {
+    font-size: 48px;
+}
+
+.navbar-dark .navbar-toggler {
+    color: #FFF;
+}
+
+.role {
+    height: 300px;
+}
+
+#content img {
+    max-width: 100%;
+}
+
+.metronome-button {
+    width: 48%;
+    height: 100%;
+}
+
+@media (max-width: 540px) {
+    .main-button {
+        font-size: 60px;
+    }
+}
+
+.bubblingG {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.bubblingG span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    margin: 59px auto;
+    background: rgb(52,58,64);
+    border-radius: 119px;
+    -o-border-radius: 119px;
+    -ms-border-radius: 119px;
+    -webkit-border-radius: 119px;
+    -moz-border-radius: 119px;
+    animation: bubblingG 1.235s infinite alternate;
+    -o-animation: bubblingG 1.235s infinite alternate;
+    -ms-animation: bubblingG 1.235s infinite alternate;
+    -webkit-animation: bubblingG 1.235s infinite alternate;
+    -moz-animation: bubblingG 1.235s infinite alternate;
+    position: relative;
+    top: 40%;
+}
+
+#bubblingG_1 {
+    animation-delay: 0s;
+    -o-animation-delay: 0s;
+    -ms-animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+    -moz-animation-delay: 0s;
+}
+
+#bubblingG_2 {
+    animation-delay: 0.3695s;
+    -o-animation-delay: 0.3695s;
+    -ms-animation-delay: 0.3695s;
+    -webkit-animation-delay: 0.3695s;
+    -moz-animation-delay: 0.3695s;
+}
+
+#bubblingG_3 {
+    animation-delay: 0.739s;
+    -o-animation-delay: 0.739s;
+    -ms-animation-delay: 0.739s;
+    -webkit-animation-delay: 0.739s;
+    -moz-animation-delay: 0.739s;
+}
+
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+}
+
+@keyframes bubblingG {
+    0% {
+        width: 24px;
+        height: 24px;
+        background-color:rgb(52,58,64);
+        transform: translateY(0);
+    }
+
+    100% {
+        width: 57px;
+        height: 57px;
+        background-color:rgb(255,255,255);
+        transform: translateY(-50px);
+    }
+}
+
+@-o-keyframes bubblingG {
+    0% {
+        width: 24px;
+        height: 24px;
+        background-color:rgb(52,58,64);
+        -o-transform: translateY(0);
+    }
+
+    100% {
+        width: 57px;
+        height: 57px;
+        background-color:rgb(255,255,255);
+        -o-transform: translateY(-50px);
+    }
+}
+
+@-ms-keyframes bubblingG {
+    0% {
+        width: 24px;
+        height: 24px;
+        background-color:rgb(52,58,64);
+        -ms-transform: translateY(0);
+    }
+
+    100% {
+        width: 57px;
+        height: 57px;
+        background-color:rgb(255,255,255);
+        -ms-transform: translateY(-50px);
+    }
+}
+
+@-webkit-keyframes bubblingG {
+    0% {
+        width: 24px;
+        height: 24px;
+        background-color:rgb(52,58,64);
+        -webkit-transform: translateY(0);
+    }
+
+    100% {
+        width: 57px;
+        height: 57px;
+        background-color:rgb(255,255,255);
+        -webkit-transform: translateY(-50px);
+    }
+}
+
+@-moz-keyframes bubblingG {
+    0% {
+        width: 24px;
+        height: 24px;
+        background-color:rgb(52,58,64);
+        -moz-transform: translateY(0);
+    }
+
+    100% {
+        width: 57px;
+        height: 57px;
+        background-color:rgb(255,255,255);
+        -moz-transform: translateY(-50px);
+    }
+}

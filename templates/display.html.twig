@@ -1,0 +1,155 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-3">
+        <nav class="navbar navbar-dark bg-dark w-100">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <svg class="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 011.414 0l6.647 6.646a.5.5 0 01-.708.708L8 2.207 1.354 8.854a.5.5 0 11-.708-.708L7.293 1.5z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <button id="dark-mode" class="btn btn-dark">
+                {% if app.request.cookies.get('dark_mode') %}
+                    {{ 'theme.light'|trans }}
+                {% else %}
+                    {{ 'theme.dark'|trans }}
+                {% endif %}
+            </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="dark-blue-text">
+                    <i class="fas fa-bars fa-1x">
+                        <svg class="bi bi-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                        </svg>
+                    </i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                <ul class="navbar-nav mr-auto">
+                    <a href="{{ path('play') }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'play.header'|trans }}</span>
+                        </li>
+                    </a>
+                    <a href="{{ path('role', { 'instrumentId': instrumentId }) }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'role.header'|trans }}</span>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="row justify-content-center my-3">
+        <div class="col-12">
+            <h3 id="artist" class="text-center"></h3>
+        </div>
+        <div class="col-12">
+            <h1 id="title" class="text-center"><b></b></h1>
+        </div>
+    </div>
+    <div id="metronome" class="row justify-content-center my-3 d-none">
+        <div class="col-12">
+            <h3>{{ 'metronome.header'|trans }}</h3>
+        </div>
+        <div class="form-group col-12 col-xl-4">
+            <label for="rate">{{ 'form.song.data.rate'|trans }}</label>
+            <input type="number" id="rate" name="rate" class="form-control" />
+        </div>
+        <div class="form-group col-12 col-xl-4">
+            <label for="meter">{{ 'form.song.data.meter'|trans }}</label>
+            <input type="number" id="meter" name="meter" class="form-control" />
+        </div>
+        <div class="col-12 col-xl-4">
+            <button id="metronomeStart" class="btn btn-secondary metronome-button">Start</button>
+            <button id="metronomeStop" class="btn btn-danger metronome-button float-right">Stop</button>
+        </div>
+    </div>
+    <div class="row justify-content-center my-3">
+        <div id="content" class="col-12">
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var currentSongId = 0;
+        
+        if (typeof (EventSource) !== "undefined") {
+            var path = '{{ path('song_refresh', { 'instrumentId': instrumentId }) }}';
+            var source = new EventSource(path);
+            source.onmessage = function (event) {
+                var data = JSON.parse(event.data);
+                if (data.id !== currentSongId) {
+                    currentSongId = data.id;
+                    document.getElementById("artist").innerHTML = data.artist;
+                    document.getElementById("title").innerHTML = data.title;
+                    document.getElementById("content").innerHTML = data.content;
+                    
+                    if (data.metronome) {
+                        $('#metronome').removeClass('d-none');
+                        stopMetronome();
+                        
+                        if (data.rate && data.meter) {
+                            document.getElementById("rate").value = data.rate;
+                            document.getElementById("meter").value = data.meter;
+                            startMetronome(data.rate, data.meter);
+                        } else {
+                            document.getElementById("rate").value = '';
+                            document.getElementById("meter").value = '';
+                            stopMetronome();
+                        }
+                    } else {
+                        $('#metronome').addClass('d-none');
+                    }
+                }
+            };
+        } else {
+            document.getElementById("content").innerHTML = "{{ 'display.sse.error'|trans }}";
+        }
+    </script>
+    <script src="{{ asset('js/metronome.js') }}"></script>
+    <script> 
+        var webApiNotSupport = "{{ 'metronome.webapi.error'|trans }}";
+        window.onload = initAudio; 
+        var counter = 0;
+        var t;
+        var x = 1000; 
+        var newMeter;
+        var newRate;
+        
+        function startMetronome(rate, meter) {
+            clearInterval(t);
+            newRate = 1000 / (Math.round(rate / 60));
+            newMeter = Math.round(meter);
+            t = setInterval(beep, newRate);
+        }
+        
+        function stopMetronome() {
+            clearInterval(t);
+        }
+
+        function beep() {
+            counter++;
+            if (counter % newMeter === 0) {
+                startTone(500);
+            } else {
+                startTone(250);
+            }
+        }
+        
+        $('#metronomeStop').click(function () {
+            stopMetronome();
+        });
+
+        $('#metronomeStart').click(function () {
+            if (context.state !== 'running') {
+                context.resume();
+            }    
+            
+            var r = $('#rate').val();
+            var m = $('#meter').val();
+            startMetronome(r, m);
+        });
+    </script>       
+{% endblock %}

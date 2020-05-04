@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}" {{ app.request.cookies.get('dark_mode') ? 'class="dark-mode"' : '' }}>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Bartosz Siejka">
+        <meta name="description" content="{{ 'seo.description'|trans }}" />
+        <meta name="keywords" content="{{ 'seo.keywords'|trans }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}?v2" />
+        <title>{% block title %}{% endblock %} {{ 'seo.title'|trans }}</title>        
+        <link href="{{ asset('css/bootstrap/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap/bootstrap-reboot.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap/bootstrap-grid.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery/jquery-ui.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery/jquery-ui.structure.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery/jquery-ui.theme.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        {% block style %}{% endblock %}
+    </head>
+  
+    <body>
+        {% set route = app.request.attributes.get('_route') %}
+        {% set route_params = app.request.attributes.get('_route_params') %}
+        {% set params = route_params|merge(app.request.query.all) %}
+        {% set currentUrl = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+        
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+        
+        <script src="{{ asset('js/jquery/jquery3.4.1.min.js') }}"></script>
+        <script src="{{ asset('js/jquery/jquery-ui.js') }}"></script>
+        <script src="{{ asset('js/sortable.js') }}"></script>
+        <script src="{{ asset('js/bootstrap/bootstrap.js') }}"></script>
+        <script src="{{ asset('js/bootstrap/bootstrap.bundle.js') }}"></script>
+        <script>
+            $('#back').click(function() {
+               window.history.back();
+            });
+        </script>
+        <script>
+            $('#dark-mode').click(function() {
+                 $.ajax({
+                    url: "{{ path('switch_to_dark' ) }}", 
+                    method: "POST",
+                    data: {
+                        'url': '{{ currentUrl }}'
+                    },
+                    complete: function(data){
+                        window.location.reload();
+                    }
+                });
+            });
+        </script>
+        {% block javascripts %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,331 @@
+form:
+    save: Zapisz
+    next: Dalej
+    submit: Wyślij
+    instrument:
+        name:  Nazwa instrumentu
+        metronome: Czy włączać metronom dla tego instrumentu?
+    setlist:
+        name: Nazwa setlisty
+    song:
+        title: Tytuł
+        artist: Wykonawca
+    song.data:
+        instrument: Instrument
+        content: Zawartość do wyświetlenia
+        rate: Tempo [uderzeń na minutę]
+        meter: Metrum
+        default: Ustaw jako domyślny widok (wyświetla się tym instrumentom, dla których nie ma dodanego widoku)
+        next: Zapisz i dodaj kolejny
+        save: Zapisz i zakończ
+        
+button:
+    add: Dodaj
+    edit: Edytuj
+    remove: Usuń
+    back: Wróć
+
+theme:
+    dark: Ciemny motyw
+    light: Jasny motyw
+
+pagination:
+    next: Następna
+    previous: Poprzednia
+        
+seo:
+    description: Aplikacja służąca do wyświetlania tekstów, nut, akordów itp. dla członków zespołu muzycznego. Jedna osoba zarządza tym, co ma być wyświetlone, inne osoby widzą tylko treść zależną od roli.
+    keywords: aplikacja, muzycy, muzyk, zespół, śpiewnik
+    title: Gramy.to
+    
+main:
+    manage: Zarządzam
+    play: Gram
+    
+manage:
+    song: Zarządzam piosenkami
+    instrument: Zarządzam instrumentami
+    setlist: Zarządzam setlistami
+    backup: Kopia zapasowa
+    restore: Przywracanie
+    
+song:
+    header: Zarządzam piosenkami
+    search: Wpisz min. 3 znaki, aby znaleźć piosenkę
+    number: Łączna liczba piosenek w bazie wynosi
+    searchbox:
+        not.found: Niestety nie znaleziono piosenki spełniającej kryteria
+    add:
+        header: Dodaj piosenkę
+        button: Dodaj piosenkę
+    edit:
+        header: Edytuj piosenkę
+    data:
+        add:
+            header: Dodaj dane piosenki
+            button: +
+        edit:
+            header: Edytuj dane piosenki
+        remove:
+            button: Usuń dane piosenki dla tego instrumentu
+        modal:
+            title: Potwierdzenie usunięcia danych piosenki
+            content: Potwierdzenie spowoduje całkowite usunięcie danych piosenki %artist% - %title% dla instrumentu %instrument%. Czy na pewno chcesz kontynuować?
+            close: Nie, dzięki
+            delete: Tak, usuń
+    modal:
+        title: Potwierdzenie usunięcia piosenki
+        content: Potwierdzenie spowoduje trwałą utratę danych dla piosenki %artist% - %title%. Czy na pewno chcesz ją usunąć?
+        close: Nie, dzięki
+        delete: Tak, usuń
+    table:
+        artist: Wykonawca
+        title: Tytuł
+        instrument: Dodane instrumenty
+    
+instrument:
+    header: Zarządzam instrumentami
+    add:
+        header: Dodaj instrument
+        button: Dodaj instrument
+    edit:
+        header: Edytuj instrument
+    table:
+        name: Nazwa
+        metronome: Metronom
+    modal:
+        title: Potwierdzenie usunięcia instrumentu
+        content: Usunięcie tego instrumentu spowoduje również trwałe usunięcie danych piosenek stworzonych dla tego intrumentu. Czy na pewno chcesz to zrobić?
+        close: Nie, dzięki
+        delete: Tak, usuń
+    
+setlist:
+    header: Zarządzam setlistami
+    button:
+        song: Piosenki
+    add:
+        header: Dodaj setliste
+        button: Dodaj setliste
+    edit:
+        header: Edytuj setliste
+    table:
+        name: Nazwa
+    modal:
+        title: Potwierdzenie usunięcia setlisty
+        content: Usunięcie tej setlisty spowoduje również usunięcie powiązań z piosenkami na setliście. Czy na pewno chcesz to zrobić?
+        close: Nie, dzięki
+        delete: Tak, usuń
+    song:
+        header: Piosenki w setliście
+        add:
+            button: Dodaj piosenki
+            header: Dodaj piosenki do setlisty
+        done: Gotowe
+        table:
+            artist: Wykonawca
+            title: Tytuł
+        modal:
+            title: Potwierdzenie usunięcia piosenki z setlisty
+            content: Potwierdzenie usunięcia piosenki %artist% - %title% z setlisty %setlist%. Czy na pewno chcesz to zrobić?
+            close: Nie, dzięki
+            delete: Tak, usuń
+        position:
+            alert:
+                strong: Coś poszło niezgodnie z planem
+                normal: Niewykluczone, że zmiana pozycji nie zapisze się trwale. Spróbuj odświeżyć stronę, jeśli to nie pomoże, skontaktuj się z administratorem.
+                
+play: 
+    header: Wybierz instrument
+    
+role:
+    header: Wybierz rolę
+    display: Wyświetlam
+    control: Steruję
+
+display:
+    sse:
+        error: Twoja przeglądarka nie obsługuje Server-Send Events. Uaktualnij ją, odblokuj obsługę skryptów lub zmień na inną.
+        
+metronome:
+    webapi:
+        error: Twoja przeglądarka nie wspiera WebAudio API. Spróbuj użyć Google Chrome lub Safari.
+    header: Metronom
+    helper: Niektóre przeglądarki nie pozwalają odtwarzać od razu dźwięków. Jeśli metronom nie wystartuje sam, użyj jeden raz przycisku "Start". Przy kolejnych piosenkach metronom powinien startować automatycznie.
+    
+control:
+    button:
+        setlist: Zarządzam setlistami
+        song: Szybka piosenka
+    quick:
+        song:
+            add:
+                header: Wybierz szybką piosenkę
+                play: GRAJ
+    set: Wyświetl wszystkim
+    alert:
+        strong: Piosenka nie została wyświetlona wszystkim
+        normal: Odśwież tę stronę lub zrestartuj przeglądarkę i spróbuj ponownie. Jeśli to nie przyniesie rezultatu, skontaktuj się z administratorem.
+        
+backup:
+    header: Kopia zapasowa
+    song: Baza piosenek
+    setlist: Baza setlist
+    instrument: Baza instrumentów
+    database: Nazwa bazy danych
+    date: Data ostatniej aktualizacji w obecnie używanej bazie
+    local: Pliki z kopii lokalnych
+    external: Pliki z kopii zewnętrznych
+    local.date: Data ostatniej aktualizacji w kopiach lokalnych
+    external.date: Data ostatniej aktualizacji w kopiach serwerowych
+    button:
+        create: Stwórz kopię zapasową
+        send: Wyślij kopie zapasowe na serwer
+        download: Pobierz kopie zapasowe z serwera
+        load: Załaduj dane z kopii zapasowej
+        usb:
+            send: Wyślij kopie zapasowe na pamięć USB
+            download: Pobierz kopie zapasowe z pamięci USB
+    choose:
+        backup:
+            header: Wybór bazy do kopii zapasowej
+        restore:
+            header: Wybór bazy do przywrócenia
+    alert:
+        success:
+            header: Sukces!
+            backup:
+                content: Kopia zapasowa wykonana pomyślnie.
+            restore:
+                content: Przywracanie z kopii zapasowej wykonane pomyślnie.
+        failed:
+            header: Niepowodzenie!
+            backup:
+                content: Niestety nie udało wykonać się kopii zapasowej. Spróbuj ponownie później. Jeśli sytuacja się powtarza, skontaktuj się z administratorem.
+            restore:
+                content: Niestety nie udało przywrócić danych z kopii zapasowej. Spróbuj ponownie później. Jeśli sytuacja się powtarza, skontaktuj się z administratorem.
+        redirect: Za chwilę zostaniesz przekierowany do menu głównego kopii zapasowych.
+    restore:
+        modal:
+            title: Potwierdzenie przywrócenia bazy
+            content: Przywrócenie tej wersji bazy spowoduje usunięcie obecnej wersji bazy wraz ze wszystkimi plikami. Czy jesteś pewny, że chcesz przywrócić tę wersję bazy?
+            close: Nie, dzięki
+            restore: Tak, przywróć
+    remote:
+        send:
+            copying: Kopiowanie pliku
+            exist:
+                remote: Nie wysłano pliku, ponieważ istnieje on już na serwerze
+                usb: Nie wysłano pliku, ponieważ istnieje on już na pamięci USB
+                local: Nie pobrano pliku, ponieważ istnieje on już lokalnie
+            alert:
+                failed:
+                    header: Niepowodzenie!
+                success:
+                    header: Sukces!
+                    content: Wszystkie pliki zostały wysłane poprawnie.
+                redirect: Za chwilę zostaniesz przekierowany do menu głównego kopii zapasowych.
+        error:
+            ssh2_connect: Funkcja ssh2_connect nie została znaleziona, nie możesz jej użyć.
+            connection: Nie można uzyskać połączenia.
+            authentication: Nie można uwierzytelnić logowania.
+            sftp: Nie można utworzyć strumienia sftp.
+            directory: Nie można otworzyć folderu.
+            local:
+                file: 
+                    open: Nie można otworzyć lokalnego pliku
+                    create: Nie można utworzyć lokalnego pliku
+                    write: Nie można zapisać do lokalnego pliku
+            remote:
+                file: 
+                    open: Na serwerze nie można otworzyć pliku
+                    create: Na serwerze nie można utworzyć pliku
+                    write: Na serwerze nie można zapisać do pliku
+            usb:
+                notFound: Nie znaleziono żadnej podłączonej pamięci USB. Podłącz urządzenie i spróbuj ponownie.
+                backupNotExist: Pliki kopii zapasowej nie istnieją na tej pamięci USB.
+                device: Wystąpił problem z urządzeniem .
+                permission: . Zostało ono usunięte lub nadane uprawnienia są niewystarczające. Wysuń i podłącz urządzenie, a następnie spróbuj ponownie. Jeśli to nie przyniesie rezultatu skontatuj się z administratorem.
+                file: 
+                    open: Na pamięci USB nie można otworzyć pliku
+                    create: Na pamięci USB nie można utworzyć pliku 
+                    write: Na pamięci USB nie można zapisać do pliku
+                    
+manual:
+    main: Strona główna
+    main.content: <p>Na stronie głównej możesz wybrać jedną z dwóch opcji używania aplikacji.</p>
+                  <p>Pierwsza - gram - służy do wyświetlania piosenek dla członków zespołu.</p>
+                  <p>Druga - zarządzam - służy do przygotowania bazy piosenek, instrumentów czy setlist, a także zarządzania kopiami zapasowymi.</p> 
+                  <p>Na stronie głównej możesz również wybrać język polski lub angielski, klikając jedną z flag znajdującą się na górze ekranu. Możesz też wybrać jeden z dwóch motywów - ciemny bądź jasny. Do użycia tej opcji musisz mieć włączoną w przeglądarce obsługę plików cookie.</p>
+                  <p>Motyw możesz również zmieniać z paska menu w dowolnym miejscu w aplikacji.</p>
+    button: Instrukcja
+    header: Instrukcja użytkownika
+    play:
+        content: <p>Opcja gram służy do wyświetlania wcześniej przygotowanych tekstów, nut, akordów itp. wszystkim członkom zespołu.</p>
+        choose.instrument: <p>W pierwszym kroku wybierz instrument, jakiego będziesz używał. Dane później wyświetlanych piosenek będą wyświetlane dla Twojego instrumentu, jeśli istnieją. Jeśli nie istnieją, zobaczysz domyślne dane piosenki.</p>
+        choose.role: <p>W drugim kroku wybierz swoją rolę w zespole.</p>
+                     <p>Jeśli wybierzesz opcję wyświetlam, będziesz mógł tylko wyświetlać zawartości piosenek.</p>
+                     <p>Jeśli wybierzesz opcję zarządzam, będziesz decydował o wyborze setlist lub pojedynczych piosenek do wyświetlenia dla całego zespołu.</p>
+        role:
+            display: <p>W tym widoku jesteś uzależniony od osoby, która steruje aplikacją. Możesz jedynie przeglądać dane piosenki wybranej przez osobę sterującą dostępne na Twój instrument.</p>
+                      <p>Do obsługi tej funkcjonalności potrzebna jest włączona opcja obsługi JavaScript oraz Server-Side Events w przeglądarce. Domyślnie, w nowoczesnych przeglądarkach, te opcje są dostępne i włączone. Jeśli jednak masz z tym problem, spróbuj zmienić przeglądarkę na Google Chrome, Safari bądź Firefox</p>
+                      <p>Jeśli przy Twoim instrumencie jest zaznaczona opcja metronomu, pojawi się on w tym widoku. Niestety nowe przeglądarki nie zawsze pozwalają na automatyczne odtwarzanie multimediów. Możliwe więc, że za pierwszym razem będziesz musiał kliknąć przycisk start przy metronomie, aby odtworzyć dźwięk. Przy kolejnych piosenkach nie powinno być już takiej konieczności.</p>
+            control:
+                content: <p>W tym widoku to Ty wybierasz, co inni mają mieć wyświetlone. Możesz wybrać pojedynczą piosenkę lub całą setlistę. Uwaga! To co wyświetla się u Ciebie nie wyświetli się u innych członków zespołu, dopóki nie wciśniesz w głównym widoku przycisku wyświetl wszystkim.</p>
+                     <p>Przy wybranej setliście widoczne będą w górnej części ekranu przyciski <<, >> oraz wyświetl wszystkim. Pierwsze dwa służą do przełączania do poprzedniej bądź następnej piosenki. Przycisk wyświetl wszystkim sprawi, że w ciągu 5 sekund reszta zespołu będzie miała wyświetloną widniejącą na Twoim ekranie piosenkę.</p>
+                setlist:
+                    content: <p>Przycisk wyświetla listę wszystkich setlist już istniejących. Z tego poziomu możesz wybrać playlistę do grania klikając przycisk z nazwą playlisty. Możesz też edytować piosenki zawarte w playliście oraz dodać nową playlistę.</p>
+                    song: <p>Po wejściu do widoku piosenek w setliście możesz zmieniać ich kolejność łapiąc za strzałki po prawej stronie wybranej piosenki i przesuwając wiersz na żądaną pozycję. Możesz również dodać kolejną piosenkę klikając przycisk dodaj piosenki.</p>
+                              <p>Na liście istniejących piosenek wytłuszczoną czcionką zaznaczone są piosenki, które już w setliście są dodane. Możesz je dodać ponownie np. jeśli chesz zagrać je dwa razy.</p>
+                              <p>Aby dodać piosenkę do setlisty należy kliknąć przycisk dodaj przy wybranej piosence.</p>
+                              <p>Aby wyszukać piosenkę zacznij pisać jej tytuł bądź wykonawcę w pasku wyszukiwania. Po trzech pierwszych znakach pojawią się wyniki. Jeśli nie ma szukanej piosenki możesz pisać dalej aby doprecyzować zapytanie.</p>
+                              <p>Aby wrócić do zarządzania piosenkami w setliście należy wybrać przycisk gotowe znajdujący się przy wyszukiwarce.</p>
+                              <p>Aby usunąć piosenkę z setlisty należy wcisnąć przycisk usuń znajdujący się przy piosence w danej setliście.</p>
+                    add: <p>Aby dodać nową setlistę kliknij przycisk dodaj setlistę, wpisz jej nazwę i kliknij zapisz.</p>
+                quick.song: <p>Przycisk szybka piosenka służy do wybrania tylko jednej piosenki do wyświetlenia, bez konieczności tworzenia setlisty.</p>
+                             <p>Aby wyszukać piosenkę zacznij pisać jej tytuł bądź wykonawcę w pasku wyszukiwania. Po trzech pierwszych znakach pojawią się wyniki. Jeśli nie ma szukanej piosenki możesz pisać dalej aby doprecyzować zapytanie.</p>
+                             <p>Aby wyświetlić piosenkę kliknij przycisk graj przy wybranej piosence.</p>
+    manage:
+        content: <p>Opcja zarządzam służy do przygotowania bazy piosenek, instrumentów i setlist, a także zarządzania kopią zapasową.</p>
+                 <p>Aby wyszukać piosenkę zacznij pisać jej tytuł bądź wykonawcę w pasku wyszukiwania. Po trzech pierwszych znakach pojawią się wyniki. Jeśli nie ma szukanej piosenki możesz pisać dalej aby doprecyzować zapytanie.</p>
+        song:
+            content: <p>Zarządzenie piosenkami służy do przygotowania i edytowania treści piosenek do wyświetlenia dla wszystkcih członków zespołu.</p>
+            add: <p>Aby dodać piosenkę należy wybrać przycisk dodaj piosenkę znajdujący się przy wyszukiwarce.</p>
+                 <p>Po podaniu wykonawcy i tytułu należy wcisnąć przycisk dalej i dodać dane piosenki dla przynajmniej jednego instrumentu.</p>
+                 <p>Dane dla pierwszego instrumentu są zawsze ustawiane jako domyślne, czyli wyświetlane wszystkim, którzy nie mają danych dla swojego instrumentu. Aby wybrać inny widok domyślnym, należy przy kolejnych danych zaznaczyć kwadracik obok pola ustaw jako domyślny widok.</p>
+                 <p>Aby zakończyć dodawanie danych po dadodanym instrumencie należy wybrać przycisk zapisz i zakończ. Aby dodać kolejne dane należy wybrać przycisk zapisz i dodaj kolejny.</p>
+            edit: <p>Aby edytować tytuł i wykonawcę piosenki należy ją wyszukać i kliknąć przycisk edytuj znajdujący się obok niej.</p>
+            remove: <p>Aby usunąć piosenkę wraz z wszystkimi danymi dla niej należy wyszukać piosenkę, kliknąć przycisk usuń znajdujący się obok niej, a następnie potwierdzić swoją decyzję.</p>
+            add.data: <p>Aby dodać dane dla piosenki należy wyszukać piosenkę i kliknąć znak + w kolumnie dodane instrumenty.</p> 
+                      <p>Dane dla pierwszego instrumentu są zawsze ustawiane jako domyślne, czyli wyświetlane wszystkim, którzy nie mają danych dla swojego instrumentu. Aby wybrać inny widok domyślnym, należy przy kolejnych danych zaznaczyć kwadracik obok pola ustaw jako domyślny widok.</p>
+                      <p>Aby zakończyć dodawanie danych po dadodanym instrumencie należy wybrać przycisk zapisz i zakończ. Aby dodać kolejne dane należy wybrać przycisk zapisz i dodaj kolejny.</p>
+            edit.data: <p>Aby edytować dane dla instrumentu należy wyszukać piosenkę i kliknąć nazwę instrumentu w kolumnie dodane instrumenty. Po kliknięciu pojawi się możliwość edytowania danych bądź całkowitego ich usunięcia.</p>
+        instrument:
+            content: <p>Zarządzanie instrumentami służy do dodawania i edytowania istniejących w bazie instrumentów.</p>
+            add: <p>Aby dodać instrument należy wybrać przycisk dodaj instrument.</p>
+                 <p>W formularzu należy wpisać nazwę instrumentu. Jeśli dla danego instrumentu ma być włączany metronom należy zaznaczyć kwadrat przy polu czy włączać metronom...</p>
+            edit: <p>Aby edytować istniejący instrument należy go wyszukać i wybrać opcję edytuj przy danym instrumencie.</p>
+            remove: <p>Aby usunąć instrument wraz z wszystkimi zapisanymi dla niego danymi piosenek należy wyszukać instrument i wcisnąć przycisk usuń znajdujący się obok niego, a następnie potwierdzić usunięcie.</p>
+        setlist:
+            content: <p>Zarządzanie setlistami służy do dodawania i edytowania istniejących w bazie setlist.</p>
+            add: <p>Aby dodać setlistę należy wybrać przycisk dodaj setlistę, wpisać jej nazwę i kliknąć przycisk zapisz.</p>
+            edit: <p>Aby edytować setlistę należy znaleźć setlistę i kliknąć przycisk edytuj znajdujący się obok danej setlisty.</p>
+            remove: <p>Aby usunąć setlistę należy znaleźć setlistę i kliknąć przycisk usuń znajdujący się obok danej setlisty, a następnie potwierdzić wybór.</p>
+            song: <p>Aby zarządzać piosenkami na setliście należy znaleźć setlistę i wcisnąć przycisk piosenki znajdujący się obok niej.</p>
+                  <p>Po wejściu do widoku piosenek w setliście możesz zmieniać ich kolejność łapiąc za strzałki po prawej stronie wybranej piosenki i przesuwając wiersz na żądaną pozycję. Możesz również dodać kolejną piosenkę klikając przycisk dodaj piosenki.</p>
+                  <p>Na liście istniejących piosenek wytłuszczoną czcionką zaznaczone są piosenki, które już w setliście są dodane. Możesz je dodać ponownie np. jeśli chesz zagrać je dwa razy.</p>
+                  <p>Aby dodać piosenkę do setlisty należy kliknąć przycisk dodaj przy wybranej piosence.</p>
+                  <p>Aby wyszukać piosenkę zacznij pisać jej tytuł bądź wykonawcę w pasku wyszukiwania. Po trzech pierwszych znakach pojawią się wyniki. Jeśli nie ma szukanej piosenki możesz pisać dalej aby doprecyzować zapytanie.</p>
+                  <p>Aby wrócić do zarządzania piosenkami w setliście należy wybrać przycisk gotowe znajdujący się przy wyszukiwarce.</p>
+                  <p>Aby usunąć piosenkę z playlisty należy wcisnąć przycisk usuń znajdujący się przy piosence w danej playliście.</p>
+        backup:
+            content: <p>Zakładka kopia zapasowa służy do wykonywania kopii zapasowej oraz przywracania baz danych piosenek, setlist oraz instrumentów. Za jej pomocą pliki kopii zapasowych można synchronizować z serwerem SSH oraz pamięcią USB.</p>
+                     <p>W tabeli widoczne są daty ostaniej aktualizacji baz obecnie używanych, daty ostanich kopii zapasowych wykonywanych lokalnie oraz daty ostatnich kopii zapasowych wykonywanych zdalnie i zsynchronizowanych z urządzeniem.</p>
+                     <p><b>Uwaga! Przy wysyłaniu/pobieraniu kopii zapasowych należy bezwględnie czekać na potwierdzenie poprawnego zakończenia. W przeciwnym razie dane mogą ulec uszkodzeniu.</b></p>
+                     <p><b>Uwaga! Po podłączeniu pamięci USB i zakończeniu korzystania z niej zaleca się najpierw wyłączyć serwer, a następnie wyjąć pamięć USB. Nie wyłączenie maszyny może spowodować uszkodzenie danych w pamięci USB.</b></p>
+            create: <p>Przycisk stwórz kopię zapasową służy do stworzenia lokalnej kopii zapasowej wybranej w kolejnym kroku bazy danych.</p>
+            load: <p>Przycisk załaduj dane z kopii zapasowej służy do przywrócenia danych z kopii zapasowej. W kolejnym oknie podane są do wyboru istniejące pliki kopii lokalnych i zewnętrznych. Należy wybrać jeden z nich i potwierdzić przywrócenie danych z kopii zapasowej.</p>
+                  <p><b>Uwaga! Ta akcja usunie trwale wszystkie dane z obecnych baz danych i stworzy nowe z danymi z plików kopii zapasowej.</b></p>
+            send: <p>Przycisk wyślij kopie zapasowe na serwer służy do wysłania wcześniej wygenerowanych plików kopii zapasowej na serwer SSH.</p>
+            download: <p>Przycisk pobierz kopie zapasowe z serwera służy do pobrania wcześniej wysłanych oraz stworzonych zdalnie kopii zapasowych.</p>
+            usb.send: <p>Przycisk wyślij kopie zapasowe na pamięć USB służy do wysyłania stworzonych wcześniej plików kopii zapasowej na pamięć USB.</p>
+            usb.download: <p>Przycisk pobierz kopie zapasowe z pamięci USB służy do pobrania wysłanych wcześniej plików kopii zapasowej z pamięci USB.</p>

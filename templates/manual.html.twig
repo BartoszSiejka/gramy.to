@@ -1,0 +1,281 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-3">
+        <nav class="navbar navbar-dark bg-dark w-100">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <svg class="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 011.414 0l6.647 6.646a.5.5 0 01-.708.708L8 2.207 1.354 8.854a.5.5 0 11-.708-.708L7.293 1.5z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <button id="dark-mode" class="btn btn-dark">
+                {% if app.request.cookies.get('dark_mode') %}
+                    {{ 'theme.light'|trans }}
+                {% else %}
+                    {{ 'theme.dark'|trans }}
+                {% endif %}
+            </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="dark-blue-text">
+                    <i class="fas fa-bars fa-1x">
+                        <svg class="bi bi-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                        </svg>
+                    </i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            </div>
+        </nav>
+    </div>
+    <div id="header" class="row justify-content-center my-3">
+        <h1 class="text-center">{{ 'manual.header'|trans }}</h1>
+    </div>
+    <div class="row my-3">
+        <ol>
+            <li>
+                <h3><a class="menu" href="#main">{{ "manual.main"|trans }}</a></h3>
+            </li>
+            <li>
+                <h3><a class="menu" href="#play">{{ "main.play"|trans }}</a></h3>
+                <ol type="a">
+                    <li><a class="menu" href="#choose-instrument">{{ "play.header"|trans }}</a></a></li>
+                    <li><a class="menu" href="#choose-role">{{ "role.header"|trans }}</a></li>
+                    <li><a class="menu" href="#display">{{ "role.display"|trans }}</a></li>
+                    <li>
+                        <a class="menu" href="#control">{{ "role.control"|trans }}</a>
+                        <ul>
+                            <li>
+                                <a class="menu" href="#control-setlist">{{ "control.button.setlist"|trans }}</a>
+                                <ul style="list-style-type: disc;">
+                                    <li><a class="menu" href="#control-setlist-add">{{ "setlist.add.button"|trans }}</a></li>
+                                    <li><a class="menu" href="#control-setlist-song">{{ "setlist.button.song"|trans }}</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="menu" href="#control-quick-song">{{ "control.button.song"|trans }}</a></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h3><a class="menu" href="#manage">{{ "main.manage"|trans }}</a></h3>
+                <ol type="a">
+                    <li>
+                        <a class="menu" href="#manage-song">{{ "manage.song"|trans }}</a>
+                        <ul>
+                            <li><a class="menu" href="#manage-song-add">{{ "song.add.button"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-song-edit">{{ "song.edit.header"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-song-remove">{{ "button.remove"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-song-data-add">{{ "song.data.add.header"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-song-data-edit">{{ "song.data.edit.header"|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="menu" href="#manage-instrument">{{ "manage.instrument"|trans }}</a>
+                        <ul>
+                            <li><a class="menu" href="#manage-instrument-add">{{ "instrument.add.button"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-instrument-edit">{{ "instrument.edit.header"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-instrument-remove">{{ "button.remove"|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="menu" href="#manage-setlist">{{ "manage.setlist"|trans }}</a>
+                        <ul>
+                            <li><a class="menu" href="#manage-setlist-song">{{ "setlist.button.song"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-setlist-add">{{ "setlist.add.button"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-setlist-edit">{{ "setlist.edit.header"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-setlist-remove">{{ "button.remove"|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="menu" href="#manage-backup">{{ "manage.backup"|trans }}</a>
+                        <ul>
+                            <li><a class="menu" href="#manage-backup-create">{{ "backup.button.create"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-backup-load">{{ "backup.button.load"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-backup-send">{{ "backup.button.send"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-backup-download">{{ "backup.button.download"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-backup-usb-send">{{ "backup.button.usb.send"|trans }}</a></li>
+                            <li><a class="menu" href="#manage-backup-usb-download">{{ "backup.button.usb.download"|trans }}</a></li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </div>
+    <div class="row my-3">
+        <div id="main" class="col-12">
+            <h2>{{ "manual.main"|trans }}</h2>
+            {{ "manual.main.content"|trans|raw }}
+        </div>
+        <div id="play" class="col-12">
+            <h2>{{ "main.play"|trans }}</h2>
+            {{ "manual.play.content"|trans|raw }}
+            <div id="choose-instrument" class="col-12">
+                <h3>{{ "play.header"|trans }}</h3>
+                {{ "manual.play.choose.instrument"|trans|raw }}
+            </div>
+            <div id="choose-role" class="col-12">
+                <h3>{{ "role.header"|trans }}</h3>
+                {{ "manual.play.choose.role"|trans|raw }}
+            </div>
+            <div id="display" class="col-12">
+                <h3>{{ "role.display"|trans }}</h3>
+                {{ "manual.play.role.display"|trans|raw }}
+            </div>
+            <div id="control" class="col-12">
+                <h3>{{ "role.control"|trans }}</h3>
+                {{ "manual.play.role.control.content"|trans|raw }}
+                <div id="control-setlist" class="col-12">
+                    <h4>{{ "control.button.setlist"|trans }}</h4>
+                    {{ "manual.play.role.control.setlist.content"|trans|raw }}
+                    <div id="control-setlist-add" class="col-12">
+                        <h5>{{ "setlist.add.button"|trans }}</h5>
+                        {{ "manual.play.role.control.setlist.add"|trans|raw }}
+                    </div>
+                    <div id="control-setlist-song" class="col-12">
+                        <h5>{{ "setlist.button.song"|trans }}</h5>
+                        {{ "manual.play.role.control.setlist.song"|trans|raw }}
+                    </div>
+                </div>
+                <div id="control-quick-song" class="col-12">
+                    <h4>{{ "control.button.song"|trans }}</h4>
+                    {{ "manual.play.role.control.quick.song"|trans|raw }}
+                </div>
+            </div>
+        </div>
+        <div id="manage" class="col-12">
+            <h2>{{ "main.manage"|trans }}</h2>
+            <div id="manage-song" class="col-12">
+            {{ "manual.manage.content"|trans|raw }}
+                <h3>{{ "manage.song"|trans }}</h3>
+                {{ "manual.manage.song.content"|trans|raw }}
+                <div id="manage-song-add" class="col-12">
+                    <h4>{{ "song.add.button"|trans }}</h4>
+                    {{ "manual.manage.song.add"|trans|raw }}
+                </div>
+                <div id="manage-song-edit" class="col-12">
+                    <h4>{{ "song.edit.header"|trans }}</h4>
+                    {{ "manual.manage.song.edit"|trans|raw }}
+                </div>
+                <div id="manage-song-remove" class="col-12">
+                    <h4>{{ "button.remove"|trans }}</h4>
+                    {{ "manual.manage.song.remove"|trans|raw }}
+                </div>
+                <div id="manage-song-data-add" class="col-12">
+                    <h4>{{ "song.data.add.header"|trans }}</h4>
+                    {{ "manual.manage.song.add.data"|trans|raw }}
+                </div>
+                <div id="manage-song-data-edit" class="col-12">
+                    <h4>{{ "song.data.edit.header"|trans }}</h4>
+                    {{ "manual.manage.song.edit.data"|trans|raw }}
+                </div>
+            </div>
+            <div id="manage-instrument" class="col-12">
+                <h3>{{ "manage.instrument"|trans }}</h3>
+                {{ "manual.manage.instrument.content"|trans|raw }}
+                <div id="manage-instrument-add" class="col-12">
+                    <h4>{{ "instrument.add.button"|trans }}</h4>
+                    {{ "manual.manage.instrument.add"|trans|raw }}
+                </div>
+                <div id="manage-instrument-edit" class="col-12">
+                    <h4>{{ "instrument.edit.header"|trans }}</h4>
+                    {{ "manual.manage.instrument.edit"|trans|raw }}
+                </div>
+                <div id="manage-instrument-remove" class="col-12">
+                    <h4>{{ "button.remove"|trans }}</h4>
+                    {{ "manual.manage.instrument.remove"|trans|raw }}
+                </div>
+            </div>
+            <div id="manage-setlist" class="col-12">
+                <h3>{{ "manage.setlist"|trans }}</h3>
+                {{ "manual.manage.setlist.content"|trans|raw }}
+                <div id="manage-setlist-song" class="col-12">
+                    <h4>{{ "setlist.button.song"|trans }}</h4>
+                    {{ "manual.manage.setlist.song"|trans|raw }}
+                </div>
+                <div id="manage-setlist-add" class="col-12">
+                    <h4>{{ "setlist.add.button"|trans }}</h4>
+                    {{ "manual.manage.setlist.add"|trans|raw }}
+                </div>
+                <div id="manage-setlist-edit" class="col-12">
+                    <h4>{{ "setlist.edit.header"|trans }}</h4>
+                    {{ "manual.manage.setlist.edit"|trans|raw }}
+                </div>
+                <div id="manage-setlist-remove" class="col-12">
+                    <h4>{{ "button.remove"|trans }}</h4>
+                    {{ "manual.manage.setlist.remove"|trans|raw }}
+                </div>
+            </div>
+            <div id="manage-backup" class="col-12">
+                <h3>{{ "manage.backup"|trans }}</h3>
+                {{ "manual.manage.backup.content"|trans|raw }}
+                <div id="manage-backup-create" class="col-12">
+                    <h4>{{ "backup.button.create"|trans }}</h4>
+                    {{ "manual.manage.backup.create"|trans|raw }}
+                </div>
+                <div id="manage-backup-load" class="col-12">
+                    <h4>{{ "backup.button.load"|trans }}</h4>
+                    {{ "manual.manage.backup.load"|trans|raw }}
+                </div>
+                <div id="manage-backup-send" class="col-12">
+                    <h4>{{ "backup.button.send"|trans }}</h4>
+                    {{ "manual.manage.backup.send"|trans|raw }}
+                </div>
+                <div id="manage-backup-download" class="col-12">
+                    <h4>{{ "backup.button.download"|trans }}</h4>
+                    {{ "manual.manage.backup.download"|trans|raw }}
+                </div>
+                <div id="manage-backup-usb-send" class="col-12">
+                    <h4>{{ "backup.button.usb.send"|trans }}</h4>
+                    {{ "manual.manage.backup.usb.send"|trans|raw }}
+                </div>
+                <div id="manage-backup-usb-download" class="col-12">
+                    <h4>{{ "backup.button.usb.download"|trans }}</h4>
+                    {{ "manual.manage.backup.usb.download"|trans|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+    </div>
+    <a id="back-to-top" href="#" class="btn btn-dark btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+        <span>
+            <svg class="bi bi-chevron-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+            </svg>
+        </span>
+    </a>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 50) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+            
+            $('#back-to-top').click(function () {
+                $('#back-to-top').hide();
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+
+            $('#back-to-top').hide();
+        });
+    </script>
+    <script>
+        $('.menu').click(function () {
+            var target = $(this).attr('href');
+            $('body,html').animate({
+                scrollTop: $(target).offset().top
+            }, 800);
+        });
+    </script>
+{% endblock %}

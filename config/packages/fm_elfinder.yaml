@@ -1,0 +1,14 @@
+fm_elfinder:
+    assets_path: ../fmelfinder
+    instances:
+        default: 
+            editor: ckeditor
+            theme: sunny
+            relative_path: true
+            connector:
+                roots:
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads/songs
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_max_size: 2M

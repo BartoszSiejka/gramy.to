@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-3">
+        <nav class="navbar navbar-dark bg-dark w-100">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <svg class="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 011.414 0l6.647 6.646a.5.5 0 01-.708.708L8 2.207 1.354 8.854a.5.5 0 11-.708-.708L7.293 1.5z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <button id="dark-mode" class="btn btn-dark">
+                {% if app.request.cookies.get('dark_mode') %}
+                    {{ 'theme.light'|trans }}
+                {% else %}
+                    {{ 'theme.dark'|trans }}
+                {% endif %}
+            </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="dark-blue-text">
+                    <i class="fas fa-bars fa-1x">
+                        <svg class="bi bi-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                        </svg>
+                    </i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                <ul class="navbar-nav mr-auto">
+                    <a href="{{ path('manage') }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'main.manage'|trans }}</span>
+                        </li>
+                    </a>
+                    <a href="{{ path('song') }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'song.header'|trans }}</span>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="row justify-content-center my-3">
+        <h1 class="text-center">{{ 'song.data.edit.header'|trans }}</h1>
+    </div>
+    <div class="row justify-content-end">
+        <div class="col-12 col-xl-4">
+            <button class="btn btn-danger w-100 h-100" data-toggle="modal" data-target="#confirmationModal" data-song-data-id="{{ songData.id }}" data-title="{{ songData.songId.title }}" data-artist="{{ songData.songId.artist }}" data-instrument-name="{{ songData.instrumentId.name }}">{{ 'song.data.remove.button'|trans }}</button>
+        </div>
+    </div>
+    {{ form_start(form) }}
+        <div class="row">
+            {% if form.instrumentId.vars.errors|length > 0 %}
+                <div class="form-group has-error col-12 col-xl-6">
+            {% else %}
+                <div class="form-group col-12 col-xl-6">
+            {% endif %}
+                {{ form_label(form.instrumentId) }}
+                <span class="invalid-feedback">{{ form_errors(form.instrumentId) }}</span>
+                {{ form_widget(form.instrumentId) }}
+            </div>
+            {% if form.defaultView.vars.errors|length > 0 %}
+                <div class="form-check has-error col-12 col-xl-6">
+            {% else %}
+                <div class="form-check col-12 col-xl-6">
+            {% endif %}
+                {{ form_label(form.defaultView) }}
+                {{ form_widget(form.defaultView) }}
+                <span class="invalid-feedback">{{ form_errors(form.defaultView) }}</span>
+            </div>
+            {% if form.content.vars.errors|length > 0 %}
+                <div class="form-group has-error col-12">
+            {% else %}
+                <div class="form-group col-12">
+            {% endif %}
+                {{ form_label(form.content) }}
+                <span class="invalid-feedback">{{ form_errors(form.content) }}</span>
+                {{ form_widget(form.content) }}
+            </div>
+        </div>
+        <div id="metronome" class="row d-none">
+            {% if form.rate.vars.errors|length > 0 %}
+                <div class="form-group has-error col-12 col-xl-6">
+            {% else %}
+                <div class="form-group col-12 col-xl-6">
+            {% endif %}
+                {{ form_label(form.rate) }}
+                <span class="invalid-feedback">{{ form_errors(form.rate) }}</span>
+                {{ form_widget(form.rate) }}
+            </div>
+            {% if form.meter.vars.errors|length > 0 %}
+                <div class="form-group has-error col-12 col-xl-6">
+            {% else %}
+                <div class="form-group col-12 col-xl-6">
+            {% endif %}
+                {{ form_label(form.meter) }}
+                <span class="invalid-feedback">{{ form_errors(form.meter) }}</span>
+                {{ form_widget(form.meter) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{ form_row(form.next, { 'attr': { 'class': 'd-none' } }) }}
+                {{ form_row(form.save) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalTitle">{{ 'song.data.modal.title'|trans }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ 'song.data.modal.content'|trans }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ 'song.data.modal.close'|trans }}</button>
+                    <a id="confirmationButton"><button type="button" class="btn btn-danger">{{ 'song.data.modal.delete'|trans }}</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function displayMetronome() {
+            var songDataInstrumentId = $('#song_data_instrumentId option:selected').val();
+            var instrumentJSON = '{{ instrumentArray|json_encode()|raw }}';
+            var instruments = JSON.parse(instrumentJSON);
+            
+            if (instruments[songDataInstrumentId] === true) {
+                $('#metronome').removeClass('d-none');
+            } else {
+                $('#metronome').addClass('d-none');
+            }
+        }
+        
+        displayMetronome();
+    </script>
+    <script>
+        $('#confirmationModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('song-data-id');
+            var title = button.data('title');
+            var artist = button.data('artist');
+            var instrumentName = button.data('instrument-name');
+            $('.modal-body').text('{{ 'song.data.modal.content'|trans }}');
+            $('.modal-body').text($('.modal-body').text().replace('%artist%', artist).replace('%title%', title).replace('%instrument%', instrumentName));
+            var path = '{{ path('song_data_remove', { 'id': 'songDataId' }) }}';
+            $('#confirmationButton').attr('href',path.replace('songDataId', id));
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-3">
+        <nav class="navbar navbar-dark bg-dark w-100">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <svg class="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 012 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 011.414 0l6.647 6.646a.5.5 0 01-.708.708L8 2.207 1.354 8.854a.5.5 0 11-.708-.708L7.293 1.5z" clip-rule="evenodd"/>
+                </svg>
+            </a>
+            <button id="dark-mode" class="btn btn-dark">
+                {% if app.request.cookies.get('dark_mode') %}
+                    {{ 'theme.light'|trans }}
+                {% else %}
+                    {{ 'theme.dark'|trans }}
+                {% endif %}
+            </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="dark-blue-text">
+                    <i class="fas fa-bars fa-1x">
+                        <svg class="bi bi-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                        </svg>
+                    </i>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                <ul class="navbar-nav mr-auto">
+                    <a href="{{ path('manage') }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'main.manage'|trans }}</span>
+                        </li>
+                    </a>
+                    <a href="{{ path('backup') }}" class="text-white">
+                        <li class="nav-item">
+                            <span class="my-2">{{ 'backup.header'|trans }}</span>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="row justify-content-center my-3">
+        <h1 class="text-center">{{ 'backup.choose.restore.header'|trans }}</h1>
+    </div>
+    <div class="row justify-content-center my-3">
+        <div class="col-12 my-1"> 
+            <button id="back" class="btn btn-light w-100 h-100">
+                {{ 'button.back'|trans }}
+            </button>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="row mt-3">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" colspan="2" class="text-center">{{ 'backup.song'|trans }}</th>
+                            <th scope="col" colspan="2" class="text-center">{{ 'backup.setlist'|trans }}</th>
+                            <th scope="col" colspan="2" class="text-center">{{ 'backup.instrument'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="col">{{ 'backup.local'|trans }}</th>
+                            <th scope="col">{{ 'backup.external'|trans }}</th>
+                            <th scope="col">{{ 'backup.local'|trans }}</th>
+                            <th scope="col">{{ 'backup.external'|trans }}</th>
+                            <th scope="col">{{ 'backup.local'|trans }}</th>
+                            <th scope="col">{{ 'backup.external'|trans }}</th>
+                        </tr>
+                        {% for i in 0..counter %}
+                            <tr>
+                                <td>
+                                    {% if localSongFileArray and localSongFileArray[i] is defined %}
+                                        <button class="btn btn-secondary" data-toggle="modal" data-target="#confirmationModal" data-path="local" data-database="1" data-file-name="{{ localSongFileArray[i][0] }}">{{ localSongFileArray[i][1]|date('d-m-Y H:i:s') }}</button>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if externalSongFileArray and externalSongFileArray[i] is defined %}
+                                        <button class="btn btn-warning" data-toggle="modal" data-target="#confirmationModal" data-path="external" data-database="1" data-file-name="{{ externalSongFileArray[i][0] }}">{{ externalSongFileArray[i][1]|date('d-m-Y H:i:s') }}</button>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if localSetlistFileArray and localSetlistFileArray[i] is defined %}
+                                        <button class="btn btn-secondary" data-toggle="modal" data-target="#confirmationModal" data-path="local" data-database="2" data-file-name="{{ localSetlistFileArray[i][0] }}">{{ localSetlistFileArray[i][1]|date('d-m-Y H:i:s') }}</button>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if externalSetlistFileArray and externalSetlistFileArray[i] is defined %}
+                                        <button class="btn btn-warning" data-toggle="modal" data-target="#confirmationModal" data-path="external" data-database="2" data-file-name="{{ externalSetlistFileArray[i][0] }}">{{ externalSetlistFileArray[i][1]|date('d-m-Y H:i:s') }}</button>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if localInstrumentFileArray and localInstrumentFileArray[i] is defined %}
+                                        <button class="btn btn-secondary" data-toggle="modal" data-target="#confirmationModal" data-path="local" data-database="3" data-file-name="{{ localInstrumentFileArray[i][0] }}">{{ localInstrumentFileArray[i][1]|date('d-m-Y H:i:s') }}</button>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if externalInstrumentFileArray and externalInstrumentFileArray[i] is defined %}
+                                        <button class="btn btn-warning" data-toggle="modal" data-target="#confirmationModal" data-path="external" data-database="3" data-file-name="{{ externalInstrumentFileArray[i][0] }}">{{ externalInstrumentFileArray[i][1]|date('d-m-Y H:i:s') }}</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% set i = i + 1 %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalTitle">{{ 'backup.restore.modal.title'|trans }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ 'backup.restore.modal.content'|trans }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ 'backup.restore.modal.close'|trans }}</button>
+                    <a id="confirmationButton"><button type="button" class="btn btn-danger" onclick="showProgress();">{{ 'backup.restore.modal.restore'|trans }}</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bubblingG d-none">
+	<span id="bubblingG_1">
+	</span>
+	<span id="bubblingG_2">
+	</span>
+	<span id="bubblingG_3">
+	</span>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('#confirmationModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var pathData = button.data('path');
+            var database = button.data('database');
+            var fileName = button.data('file-name');
+            var path = '{{ path('restore_data', { 'path': 'pathData', 'database': 'database', 'fileName': 'fileName' }) }}';
+            $('#confirmationButton').attr('href',path.replace('pathData', pathData).replace('database', database).replace('fileName', fileName));
+        });
+    </script>
+    <script>
+        function showProgress() {
+            $('.bubblingG').removeClass('d-none');
+        }
+    </script>
+{% endblock %}
