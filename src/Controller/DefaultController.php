@@ -19,6 +19,8 @@ use App\Entity\DatabaseVersion;
 use ZipArchive;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 
 class DefaultController extends AbstractController
 {
@@ -179,20 +181,16 @@ class DefaultController extends AbstractController
             $pathdir = "uploads/songs/";
             $date = $databaseVersion->getSong()->format('YmdHis');
             $zipcreated = "../backup/local/songs/".$date.".zip";
-            $zip = new \ZipArchive();
             $exec = exec('cd uploads/songs && mysqldump -u'.$databaseUser.' -p'.$databasePassword.' '.$databaseName.' song song_data > songs.sql', $output, $return_val);
             $fileArray = array();
 
-            if ($return_val == 0 && $zip->open($zipcreated, ZipArchive::CREATE) === TRUE) {
-                $dir = opendir($pathdir);
+            if ($return_val == 0) {
+                $createZip = $this->zipData($pathdir, $zipcreated);
                 
-                while ($file = readdir($dir)) {
-                    if (is_file($pathdir . $file)) {
-                        $zip->addFile($pathdir . $file, $file);
-                    }
+                if ($createZip == false) {
+                    return $this->render('admin/gramyto/backupFailed.html.twig');
                 }
-
-                $zip->close();
+                
                 exec('rm uploads/songs/songs.sql');
                 
                 $backupDir = opendir('../backup/local/songs/');
@@ -1124,5 +1122,37 @@ class DefaultController extends AbstractController
             $newFileArray  = array_values($fileArray);
             $this->removeTooMuchFiles($maxFilesInDirectory, $path, $newFileArray);
         }
+    }
+    
+    private function zipData($source, $destination) {
+        if (extension_loaded('zip') === true) {
+            if (file_exists($source) === true) {
+                $zip = new ZipArchive();
+
+                if ($zip->open($destination, ZIPARCHIVE::CREATE) === true) {
+                    $source = realpath($source);
+                    
+                    if (is_dir($source) === true) {
+                        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+                        
+                        foreach ($files as $file) {
+                            if ($file->getFileName() !== '..' && $file->getFileName() !== '.') {
+                                $file = realpath($file);
+
+                                if (is_dir($file) === true) {
+                                    $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+                                } else if (is_file($file) === true) {
+                                    $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+                                }
+                            }
+                        }
+                    } else if (is_file($source) === true) {
+                        $zip->addFromString(basename($source), file_get_contents($source));
+                    }
+                }
+                return $zip->close();
+            }
+        }
+        return false;
     }
 }
