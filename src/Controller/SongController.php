@@ -271,6 +271,7 @@ class SongController extends AbstractController
         $song = $em->getRepository(Song::class)->findOneBy(array('id' => $id));
         $songData = $em->getRepository(SongData::class)->findBy(array('songId' => $song));
         $setlistSongs = $em->getRepository(SetlistSong::class)->findBy(array('songId' => $song));
+        $allSetlistSongs = $em->getRepository(SetlistSong::class)->findAll();
         $databaseVersion = $em->getRepository(DatabaseVersion::class)->findOneBy(array('id' => 1));
         
         if (!$databaseVersion) {
@@ -282,6 +283,13 @@ class SongController extends AbstractController
         }
         
         foreach ($setlistSongs as $one) {
+            foreach ($allSetlistSongs as $rest) {
+                if ($rest->getSetlistId() == $one->getSetlistId() && $rest->getPosition() > $one->getPosition()) {
+                    $rest->setPosition($rest->getPosition() - 1);
+                    $em->persist($rest);
+                }
+            }
+            
             $em->remove($one);
         }
         
