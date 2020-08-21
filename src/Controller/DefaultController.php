@@ -270,7 +270,7 @@ class DefaultController extends AbstractController
             }
         }
         
-        sort($localSongFileArray);
+        rsort($localSongFileArray);
         
         $externalSongDir = opendir($externalSongPathDir);
                 
@@ -280,7 +280,7 @@ class DefaultController extends AbstractController
             }
         }
         
-        sort($externalSongFileArray);
+        rsort($externalSongFileArray);
         
         $localSetlistDir = opendir($localSetlistPathDir);
                 
@@ -290,7 +290,7 @@ class DefaultController extends AbstractController
             }
         }
         
-        sort($localSetlistFileArray);
+        rsort($localSetlistFileArray);
         
         $externalSetlistDir = opendir($externalSetlistPathDir);
                 
@@ -300,7 +300,7 @@ class DefaultController extends AbstractController
             }
         }
         
-        sort($externalSetlistFileArray);
+        rsort($externalSetlistFileArray);
         
         $localInstrumentDir = opendir($localInstrumentPathDir);
                 
@@ -310,7 +310,7 @@ class DefaultController extends AbstractController
             }
         }
         
-        sort($localInstrumentFileArray);
+        rsort($localInstrumentFileArray);
         
         $externalInstrumentDir = opendir($externalInstrumentPathDir);
                 
@@ -320,7 +320,7 @@ class DefaultController extends AbstractController
             }
         }
         
-        sort($externalInstrumentFileArray);
+        rsort($externalInstrumentFileArray);
         
         $counter = max(array(count($localSongFileArray), count($externalSongFileArray), count($localSetlistFileArray), count($externalSetlistFileArray), count($localInstrumentFileArray), count($externalInstrumentFileArray)));
        
