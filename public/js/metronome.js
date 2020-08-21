@@ -194,7 +194,7 @@ function initAudio()
 function startTone(frequency)
 {
     var now = context.currentTime;
-
+    oscillator.type = 'triangle'; //sine, square, triangle, sawtooth
     oscillator.frequency.setValueAtTime(frequency, now);
 
     // Ramp up the gain so we can hear the sound.

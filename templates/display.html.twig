@@ -120,7 +120,7 @@
         
         function startMetronome(rate, meter) {
             clearInterval(t);
-            newRate = 1000 / (Math.round(rate / 60));
+            newRate = 1000 / (rate / 60);
             newMeter = Math.round(meter);
             t = setInterval(beep, newRate);
         }
@@ -132,9 +132,9 @@
         function beep() {
             counter++;
             if (counter % newMeter === 0) {
-                startTone(500);
+                startTone(494);
             } else {
-                startTone(250);
+                startTone(448);
             }
         }
         

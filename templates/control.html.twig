@@ -148,9 +148,9 @@
         </script>
     {% endif %}
     <script>
-        {% if instrument.metronome and songId != 0 and song.rate and song.meter %}
+        {% if instrument.metronome and songId != 0 and songData.rate and songData.meter %}
             stopMetronome();
-            startMetronome('{{ song.rate }}', '{{ song.meter }}');
+            startMetronome('{{ songData.rate }}', '{{ songData.meter }}');
         {% endif %}
     </script>
     <script src="{{ asset('js/metronome.js') }}"></script>
@@ -165,7 +165,7 @@
         
         function startMetronome(rate, meter) {
             clearInterval(t);
-            newRate = 1000 / (Math.round(rate / 60));
+            newRate = 1000 / (rate / 60);
             newMeter = Math.round(meter);
             t = setInterval(beep, newRate);
         }
@@ -177,9 +177,9 @@
         function beep() {
             counter++;
             if (counter % newMeter === 0) {
-                startTone(500);
+                startTone(494);
             } else {
-                startTone(250);
+                startTone(448);
             }
         }
         
