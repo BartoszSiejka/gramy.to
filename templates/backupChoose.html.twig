@@ -52,6 +52,9 @@
         </div>
     </div>
     <div class="row justify-content-center">
+        <p><b>{{ 'backup.setlist.notification'|trans }}</b></p>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-12 col-xl-4 my-1">
             <a href="{{ path('backup_data', { 'database': 1 }) }}">
                 <button class="btn btn-secondary w-100 h-100" onclick="showProgress();">{{ 'backup.song'|trans }}</button>

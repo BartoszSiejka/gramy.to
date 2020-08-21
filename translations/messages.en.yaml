@@ -177,6 +177,7 @@ backup:
     external: External backup files
     local.date: Last update of local backup
     external.date: Last update of external backup
+    setlist.notification: Attention! Check setlist database changes!
     button:
         create: Make backup
         send: Send backup to server

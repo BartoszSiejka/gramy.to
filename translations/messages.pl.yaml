@@ -177,6 +177,7 @@ backup:
     external: Pliki z kopii zewnętrznych
     local.date: Data ostatniej aktualizacji w kopiach lokalnych
     external.date: Data ostatniej aktualizacji w kopiach serwerowych
+    setlist.notification: Uwaga! Sprawdź, czy nie zmieniły się dane w setlistach!
     button:
         create: Stwórz kopię zapasową
         send: Wyślij kopie zapasowe na serwer
