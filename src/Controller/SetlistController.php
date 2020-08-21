@@ -357,6 +357,11 @@ class SetlistController extends AbstractController
         $postSongPositions = $_POST['postSongPositions'];
         $setlistRepository = $em->getRepository(Setlist::class)->findOneBy(array('id' => $setlistId));
         $setlistSongRepository = $em->getRepository(SetlistSong::class)->findBy(array('setlistId' => $setlistRepository));
+        $databaseVersion = $em->getRepository(DatabaseVersion::class)->findOneBy(array('id' => 1));
+        
+        if (!$databaseVersion) {
+            $databaseVersion = new DatabaseVersion();
+        }
         
         foreach ($setlistSongRepository as $setlistSong) {
             foreach ($postSongPositions as $key => $value) {
@@ -367,6 +372,7 @@ class SetlistController extends AbstractController
             }
         }
         
+        $databaseVersion->setSetlist(new \DateTime());
         $em->flush();
         
         return new JsonResponse('Position is changed');

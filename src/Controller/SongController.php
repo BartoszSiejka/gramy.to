@@ -291,6 +291,7 @@ class SongController extends AbstractController
             }
             
             $em->remove($one);
+            $databaseVersion->setSetlist(new \DateTime());
         }
         
         $em->remove($song);
