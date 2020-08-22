@@ -48,6 +48,25 @@ class DefaultController extends AbstractController
         return $this->redirect($url);
     }
     
+    public function contentScale(Request $request) 
+    {
+        $url = $_POST['url'];
+        $expireDate = new \DateTime('now');
+        $expireDate->modify('+200 years');
+        $response = new Response("Content scale", 200);
+        $cookies = $request->cookies;
+        
+        if ($cookies->has('content_scale') && $cookies->get('content_scale') == true) {
+            $response->headers->setCookie(Cookie::create('content_scale', false, $expireDate));
+            $response->send();
+        } else {
+            $response->headers->setCookie(Cookie::create('content_scale', true, $expireDate));
+            $response->send();
+        }
+        
+        return $this->redirect($url);
+    }
+    
     public function backup()
     {
         $em = $this->getDoctrine()->getManager();

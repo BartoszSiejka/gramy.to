@@ -42,7 +42,14 @@
                 <ol type="a">
                     <li><a class="menu" href="#choose-instrument">{{ "play.header"|trans }}</a></a></li>
                     <li><a class="menu" href="#choose-role">{{ "role.header"|trans }}</a></li>
-                    <li><a class="menu" href="#display">{{ "role.display"|trans }}</a></li>
+                    <li>
+                        <a class="menu" href="#display">{{ "role.display"|trans }}</a>
+                        <ul>
+                            <li>
+                                <a class="menu" href="#display-scale">{{ "manual.play.role.display.scale.header"|trans }}</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a class="menu" href="#control">{{ "role.control"|trans }}</a>
                         <ul>
@@ -121,7 +128,11 @@
             </div>
             <div id="display" class="col-12">
                 <h3>{{ "role.display"|trans }}</h3>
-                {{ "manual.play.role.display"|trans|raw }}
+                {{ "manual.play.role.display.content"|trans|raw }}
+                <div id="display-scale" class="col-12">
+                    <h4>{{ "manual.play.role.display.scale.header"|trans }}</h4>
+                    {{ "manual.play.role.display.scale.content"|trans|raw }}
+                </div>
             </div>
             <div id="control" class="col-12">
                 <h3>{{ "role.control"|trans }}</h3>

@@ -17,6 +17,12 @@ switch_to_dark:
     requirements:
         _locale: pl|en
 
+content_scale:
+    path: /{_locale}/scale
+    controller: App\Controller\DefaultController::contentScale
+    requirements:
+        _locale: pl|en
+
 manage:
     path:
         pl: /{_locale}/zarzadzam/

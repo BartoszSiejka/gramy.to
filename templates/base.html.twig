@@ -54,6 +54,20 @@
                 });
             });
         </script>
+        <script>
+            $('#content-scale').click(function() {
+                 $.ajax({
+                    url: "{{ path('content_scale' ) }}", 
+                    method: "POST",
+                    data: {
+                        'url': '{{ currentUrl }}'
+                    },
+                    complete: function(data){
+                        window.location.reload();
+                    }
+                });
+            });
+        </script>
         {% block javascripts %}
         {% endblock %}
     </body>
