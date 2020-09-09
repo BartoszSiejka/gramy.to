@@ -2,6 +2,8 @@
 
 ENGLISH [HERE](README_EN.md)
 
+ZOBACZ DEMO [TUTAJ](http://gramy.to.bsiejka.com/)
+
 Gramy.to jest aplikacją webową przeznaczoną dla zespołów muzycznych. Jej głównym przeznaczeniem jest wyświetlanie wszystkim członkom zespołu tekstów, akordów, nut itp. do utworów wybieranych przez jedną osobę z zespołu. Aplikacja obsługiwana jest przez przeglądarkę - nie potrzeba instalować innych aplikacji.
 
 ## Szybka instalacja

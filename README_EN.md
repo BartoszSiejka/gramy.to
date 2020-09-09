@@ -1,5 +1,9 @@
 # Gramy.to (we-play.it)
 
+POLSKI [TUTAJ](README.md)
+
+SHOW APP DEMO [HERE](http://gramy.to.bsiejka.com/en/)
+
 Gramy.to (we-play.it) is web application intended for music band. It main destinity is display for all band members lyrics, chords, notes etc. to songs which are selected by one of them. Application working in modern web browser so you don't need to install any other applications.
 
 ## Getting Started
